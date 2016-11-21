@@ -1,12 +1,20 @@
 CFLAGS= g++ -g -Wall -Weffc++ -std=c++11 -c -Iinclude
 #All Targets
-all: hello
-	g++ -o bin/run bin/try.o
+all: Run
+	g++ -o bin/run bin/Card.o
 
-hello:bin/try.o 
+Run:Card KeyGenerator
 
-bin/try.o: src/try.cpp
-	$(CFLAGS) -o bin/try.o src/try.cpp
+Card: bin/Card.o bin/FigureCard.o
+bin/Card.o: src/Card.cpp
+	$(CFLAGS) -o bin/Card.o  src/Card.cpp
+bin/FigureCard.o: src/FigureCard.cpp
+	$(CFLAGS) -o bin/FigureCard.o  src/FigureCard.cpp
+
+KeyGenerator: bin/KeyGenerator.o
+bin/KeyGenerator.o: src/KeyGenerator.cpp
+	$(CFLAGS) -o bin/KeyGenerator.o  src/KeyGenerator.cpp
+
 	
 clean:
 	rm -f bin/*
