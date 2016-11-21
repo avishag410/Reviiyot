@@ -58,7 +58,7 @@ public:
 	NumericCard(string cardStr);
 	//TODO: Add copy ctor & copy assignment op
 	virtual string toString() override;
-
+    virtual ~NumericCard() override;
 };
 
 #endif

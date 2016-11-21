@@ -14,11 +14,6 @@ string FigureCard::toString(){
     return "test";
 }
 
-
-int FigureCard::compare(Card &otherCard){
-    return 1;
-}
-
 FigureCard::~FigureCard(void){
 
 }

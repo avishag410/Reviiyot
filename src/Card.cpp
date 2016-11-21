@@ -1,10 +1,6 @@
 #include<iostream>
 #include<Card.h>
 
-Shape Card::get_shape() const
-{
-	return shape;
-}
 
 int Card::get_key() const
 {
