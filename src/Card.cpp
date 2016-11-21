@@ -17,3 +17,11 @@ void Card::set_key(int key)
 	//TODO:exceptions?
 	this->key=key;
 }
+
+int Card::compare(Card &otherCard){
+    return 0;
+}
+
+Card::~Card(void){
+
+}

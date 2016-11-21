@@ -49,7 +49,7 @@ public:
 	virtual string toString() override;
 	virtual int compare(Card &otherCard) override;
 	Figure get_figure() const;
-	
+    virtual ~FigureCard() override;
 };
 
 class NumericCard : public Card {
