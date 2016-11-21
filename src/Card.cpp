@@ -18,8 +18,9 @@ void Card::set_key(int key)
 	this->key=key;
 }
 
-int Card::compare(Card &otherCard){
-    return 0;
+int Card::compare(Card &otherCard)
+{
+	return ( this->get_key() ) - ( otherCard.get_key() );
 }
 
 Card::~Card(void){

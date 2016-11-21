@@ -10,11 +10,6 @@ FigureCard::FigureCard(string cardStr)
 	valueString=cardStr;
 }
 
-Figure FigureCard::get_figure() const
-{
-	return figure;
-}
-
 string FigureCard::toString(){
     return "test";
 }
