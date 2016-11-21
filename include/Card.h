@@ -34,8 +34,14 @@ public:
   returns -1 if this<otherCard
   */
   int compare(Card &otherCard);
+<<<<<<< HEAD
   int get_key() const;
+=======
+  int get_key();
+>>>>>>> refs/heads/CONFLICT-HANDLE
   void set_key(int key);
+  void set_shape(Shape nShape);
+  Shape get_shape();
 };
 
 class FigureCard : public Card {
