@@ -10,8 +10,3 @@ NumericCard::NumericCard(string cardStr)
 	valueString=cardStr;
 }
 
-int NumericCard::get_number() const
-{
-	return this->number;
-}
-

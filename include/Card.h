@@ -34,30 +34,31 @@ public:
   returns -1 if this<otherCard
   */
   int compare(Card &otherCard);
-  Shape get_shape() const;
   int get_key() const;
   void set_key(int key);
 };
 
 class FigureCard : public Card {
 private:
+	//not in use,therefore not initialized
 	Figure figure;
 public:
 	FigureCard(string cardStr);
 	//TODO: Add copy ctor & copy assignment op
 	virtual string toString() override;
-	Figure get_figure() const;
+	
 	
 };
 
 class NumericCard : public Card {
 private:
+	//not in use,therefore not initialized
 	int number;
 public:
 	NumericCard(string cardStr);
 	//TODO: Add copy ctor & copy assignment op
 	virtual string toString() override;
-	int get_number() const;
+	
 };
 
 #endif
