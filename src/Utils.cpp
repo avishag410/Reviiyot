@@ -18,5 +18,22 @@ Cards::Shape Utils::parseShape(string shapeLetter)
 	else{
 		throw invalid_argument("FigureClass: Not a valid shape");
 	}
+}
 
+bool Utils::isNumericCard(string cardValue) {
+	//cout << cardValue.size() << endl;
+	string valueStr = cardValue.substr(0, cardValue.size() - 1);
+	//cout << "valueStr" << endl;
+	//cout << valueStr << endl;
+	try {
+
+		int value = atoi(valueStr.c_str());
+	//	cout << "value" << endl;
+	//	cout << value << endl;
+		return value > 1;
+	}
+	catch (exception &e) {
+	//	cout << "exception" << endl;
+		return false;
+	}
 }

@@ -1,27 +1,45 @@
 #include <iostream>
 #include <vector>
 #include <Deck.h>
+#include <Utils.h>
+#include <Card.h>
 
 using namespace Cards;
+using namespace std;
 
-Deck::Deck(std::string cards)
+Deck::Deck(string cards)
 {
-//    std::string s = "scott>=tiger>=mushroom";
-//    std::string delimiter = ">=";
-//
-//    size_t pos = 0;
-//    std::string token;
-//    while ((pos = s.find(delimiter)) != std::string::npos) {
-//        token = s.substr(0, pos);
-//        std::cout << token << std::endl;
-//        s.erase(0, pos + delimiter.length());
-//    }
-//    std::cout << s << std::endl;
+    string delimiter = " ";
+    size_t pos = 0;
+    string token;
+
+    // insert the new cards at the beginning, so the fetch card is from the end
+    while ((pos = cards.find(delimiter)) != std::string::npos) {
+        token = cards.substr(0, pos);
+        cout << token << endl;
+
+        Deck::insertCard(token);
+
+        cards.erase(0, pos + delimiter.length());
+    }
+    cout << cards << endl;
+    Deck::insertCard(cards);
 }
 
-// when the constructor is called with the string of cards, we will split it, then we will get the total of cards
-// then we can initialize the vector with a size and run reverse iterators, so when we need to fetch card, we will fetch
-// the one from the top. also if when need to print the vector, we will run reverse iterator ;)
+void Deck::insertCard(string cardStr){
+    Card *card;
+    // create new card with a smart pointer
+    if(Utils::isNumericCard(cardStr)){
+        cout << "is numeric" << endl;
+        card = new NumericCard(cardStr);
+    } else {
+        cout << "is figure" << endl;
+        card = new FigureCard(cardStr);
+    }
+
+    Deck::cards.insert(Deck::cards.begin(), card);
+}
+
 Card* Deck::fetchCard(){
 
     // TODO copy constructor or operator = then will not be null reference
