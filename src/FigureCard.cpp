@@ -18,9 +18,11 @@ FigureCard::FigureCard(string cardStr)
 	shapeStr=valueString.back();
 	string valueStr=valueString.substr(0,valueString.size()-1);
 	
-	//Cards::Shape  shape = Utils::parseShape(shapeStr);
-	//Card::set_shape(shape);
-	
+	Cards::Shape  shape = Utils::parseShape(shapeStr);
+	Card::set_shape(shape);
+
+	std::cout << shape << std::endl;
+
 	//parse figure char
 	if (valueStr.compare("J")==0)
 		figure=Cards::Figure::Jack;

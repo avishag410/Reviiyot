@@ -41,12 +41,12 @@ void Deck::insertCard(string cardStr){
 }
 
 Card* Deck::fetchCard(){
-
-    // TODO copy constructor or operator = then will not be null reference
-    Card* result = Deck::cards[Deck::cards.size()-1];
-    Deck::cards.pop_back();
-
-    return result;
+    if( Deck::cards.size() > 0){
+        Card* result = Deck::cards.back();
+        Deck::cards.pop_back();
+        return result;
+    }
+    return NULL;
 }
 int Deck::getNumberOfCards(){
     return Deck::cards.size();

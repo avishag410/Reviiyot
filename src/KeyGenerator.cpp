@@ -23,19 +23,21 @@ int KeyGenerator::generate(string cardString)
 	
 	//parse value card
 	//figure card
+	// TODO does this also need to be *4?
 	if (valueStr.compare("J")==0)
-		value=N+1+ static_cast<int>(Cards::Figure::Jack);
+		value=(N+1+ static_cast<int>(Cards::Figure::Jack)*4);
 	else if (valueStr.compare("Q")==0)
-		value=N+1+static_cast<int>(Cards::Figure::Queen);
+		value=(N+1+static_cast<int>(Cards::Figure::Queen)*4);
 	else if (valueStr.compare("K")==0)
-		value=N+1+static_cast<int>(Cards::Figure::King);
+		value=(N+1+static_cast<int>(Cards::Figure::King)*4);
 	else if (valueStr.compare("A")==0)
-		value=N+1+static_cast<int>(Cards::Figure::Ace);
+		value=(N+1+static_cast<int>(Cards::Figure::Ace)*4);
 	//numeric card
 	else
 		value=(stoi(valueStr)-2)*4;
 		
 		
 	result=value+shape;
+	std::cout << result << std::endl;
 	return result;
 }
