@@ -10,6 +10,8 @@ using namespace std;
 class Hand {
 private:
     // Declare here the collection of "Card *" of the hand
+	//<key,ptr_to_card_obj>
+	map<int,Card*> hashMap;
 public:
     bool addCard(Card &card);
     bool removeCard(Card &card);
