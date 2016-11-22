@@ -18,7 +18,7 @@ NumericCard::NumericCard(string cardStr)
 }
 
 string NumericCard::toString(){
-	return "test";
+	return valueString;
 }
 
 
