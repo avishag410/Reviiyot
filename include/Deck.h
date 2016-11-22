@@ -11,7 +11,7 @@ class Deck {
 private:
 	// Declare here the collection of "Card *" of the deck
     vector<Card*> cards;
-	
+
 public:
     Deck(string cards);
 	Card* fetchCard();   //Returns the top card of the deck and remove it rom the deck
