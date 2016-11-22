@@ -1,2 +1,11 @@
 src/try.cpp
 makefile_try
+*.xml
+
+*.iml
+
+*.o
+
+CMakeLists.txt
+
+Reviiyot
