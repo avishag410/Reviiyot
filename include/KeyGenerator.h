@@ -4,20 +4,6 @@
 #include <iostream>
 using namespace std;
 
-enum Shape {
-	Club,
-	Diamond,
-	Heart,
-	Spade
-};
-
-enum Figure {
-	Jack,
-	Queen,
-	King,
-	Ace
-};
-
 class KeyGenerator
 {
 	private:

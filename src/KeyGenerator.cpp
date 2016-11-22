@@ -1,6 +1,11 @@
 #include<KeyGenerator.h>
 #include<iostream>
 #include<exception>
+#include <Utils.h>
+#include "../include/Card.h"
+
+using namespace Cards;
+
 KeyGenerator::KeyGenerator(int n):N(n){}
 
 int KeyGenerator::generate(string cardString)
@@ -19,13 +24,13 @@ int KeyGenerator::generate(string cardString)
 	//parse value card
 	//figure card
 	if (valueStr.compare("J")==0)
-		value=N+1+Jack;
+		value=N+1+ static_cast<int>(Cards::Figure::Jack);
 	else if (valueStr.compare("Q")==0)
-		value=N+1+Queen;
+		value=N+1+static_cast<int>(Cards::Figure::Queen);
 	else if (valueStr.compare("K")==0)
-		value=N+1+King;
+		value=N+1+static_cast<int>(Cards::Figure::King);
 	else if (valueStr.compare("A")==0)
-		value=N+1+Ace;
+		value=N+1+static_cast<int>(Cards::Figure::Ace);
 	//numeric card
 	else
 		value=(stoi(valueStr)-2)*4;

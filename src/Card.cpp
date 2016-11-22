@@ -1,6 +1,7 @@
 #include<iostream>
 #include<Card.h>
 
+using namespace Cards;
 
 int Card::get_key() const
 {
@@ -17,6 +18,10 @@ void Card::set_key(int key)
 int Card::compare(Card &otherCard)
 {
 	return ( this->get_key() ) - ( otherCard.get_key() );
+}
+
+void set_shape(Cards::Shape nShape){
+
 }
 
 Card::~Card(void){
