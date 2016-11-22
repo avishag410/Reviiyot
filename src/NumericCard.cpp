@@ -1,6 +1,7 @@
 #include<iostream>
 #include<Card.h>
 #include<Utils.h>
+#include<string>
 #include "../include/Card.h"
 
 using namespace std;

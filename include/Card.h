@@ -40,7 +40,7 @@ public:
 	*/
 	int compare(Card &otherCard);
 
-	int get_key() const;
+	int get_key() ;
 
 	void set_key(int key);
 

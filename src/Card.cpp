@@ -2,9 +2,10 @@
 #include<Card.h>
 #include "../include/Card.h"
 
+using namespace std;
 using namespace Cards;
 
-int Card::get_key() const
+int Card::get_key() 
 {
 	//TODO:exceptions?
 	return 10; // Card::key;
@@ -32,3 +33,4 @@ Cards::Shape Card::get_shape(){
 Card::~Card(void){
 
 }
+
