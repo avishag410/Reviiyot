@@ -10,5 +10,6 @@ class Utils
 {
 public:
 	static Cards::Shape parseShape(string shapeLetter);
+	static bool isNumericCard(string cardValue);
 };
 #endif

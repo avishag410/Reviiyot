@@ -12,6 +12,7 @@ class Deck {
 private:
 	// Declare here the collection of "Card *" of the deck
     vector<Card*> cards;
+	void insertCard(string cardStr);
 
 public:
     Deck(string cards);
