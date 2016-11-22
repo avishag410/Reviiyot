@@ -26,4 +26,4 @@ Utils.o: src/Utils.cpp
 	$(CC) $(CFLAGS) src/Utils.cpp
 
 clean:
-	rm -f bin/*
+	rm -rf *.o Reviiyot
