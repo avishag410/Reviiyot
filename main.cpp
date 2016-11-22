@@ -13,6 +13,8 @@ int main() {
         std::cout << card->get_key() << std::endl;
         std::cout << "card->get_shape() " << std::endl;
         std::cout << card->get_shape() << std::endl;
+        std::cout << "card->toString() " << std::endl;
+        std::cout << card->toString() << std::endl;
         card = deck->fetchCard();
 
     }

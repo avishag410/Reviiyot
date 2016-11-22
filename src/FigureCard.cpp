@@ -5,14 +5,10 @@
 
 using namespace std;
 using namespace Cards;
-/*
-	FigureClass.cpp
-*/
 
-FigureCard::FigureCard(string cardStr)
-{
+FigureCard::FigureCard(string cardStr) {
 	valueString=cardStr;
-	
+
 	//parse the card represented string
 	string shapeStr;
 	shapeStr=valueString.back();
@@ -37,7 +33,7 @@ FigureCard::FigureCard(string cardStr)
 }
 
 string FigureCard::toString(){
-    return "test";
+    return valueString;
 }
 
 FigureCard::~FigureCard(void){

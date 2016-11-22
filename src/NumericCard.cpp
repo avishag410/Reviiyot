@@ -1,11 +1,12 @@
 #include<iostream>
 #include<Card.h>
 #include<Utils.h>
+#include "../include/Card.h"
+
 using namespace std;
 using namespace Cards;
 
-NumericCard::NumericCard(string cardStr)
-{
+NumericCard::NumericCard(string cardStr){
 	valueString=cardStr;
 	//parse the card represented string
 	string shapeStr;
@@ -20,7 +21,7 @@ NumericCard::NumericCard(string cardStr)
 }
 
 string NumericCard::toString(){
-	return "test";
+	return valueString;
 }
 
 
