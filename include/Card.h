@@ -4,56 +4,63 @@
 #include <iostream>
 using namespace std;
 
-enum Shape {
-	Club,
-	Diamond,
-	Heart,
-	Spade
-};
+namespace Cards {
+	enum Shape {
+		Club,
+		Diamond,
+		Heart,
+		Spade
+	};
 
-enum Figure {
-	Jack,
-	Queen,
-	King,
-	Ace
-};
+	enum Figure {
+		Jack,
+		Queen,
+		King,
+		Ace
+	};
+}
+
+using namespace Cards;
 
 class Card {
 private:
-  Shape shape;
-  int key;//number represents the card
+	Cards::Shape shape;
+	int key;//number represents the card
 protected:
-  string valueString;
+	string valueString;
 
 public:
-  virtual string toString() = 0; //Returns the string representation of the card "<value><shape>" exp: "12S" or "QD"
-  virtual ~Card();
-  /*
-  returns 0 if equals
-  returns 1 if this>otherCard
-  returns -1 if this<otherCard
-  */
-  int compare(Card &otherCard);
-<<<<<<< HEAD
-  int get_key() const;
-=======
-  int get_key();
->>>>>>> refs/heads/CONFLICT-HANDLE
-  void set_key(int key);
-  void set_shape(Shape nShape);
-  Shape get_shape();
+	virtual string toString() = 0; //Returns the string representation of the card "<value><shape>" exp: "12S" or "QD"
+	virtual ~Card();
+
+	/*
+	returns 0 if equals
+	returns 1 if this>otherCard
+	returns -1 if this<otherCard
+	*/
+	int compare(Card &otherCard);
+
+	int get_key() const;
+
+	void set_key(int key);
+
+	void set_shape(Cards::Shape nShape);
+
+	Cards::Shape get_shape();
 };
 
 class FigureCard : public Card {
 private:
 	//not in use,therefore not initialized
-	Figure figure;
+	Cards::Figure figure;
 public:
 	FigureCard(string cardStr);
+
 	//TODO: Add copy ctor & copy assignment op
 	virtual string toString() override;
-    virtual ~FigureCard() override;
-	
+
+	virtual ~FigureCard() override;
+
 };
 
 class NumericCard : public Card {
@@ -62,9 +69,12 @@ private:
 	int number;
 public:
 	NumericCard(string cardStr);
+
 	//TODO: Add copy ctor & copy assignment op
 	virtual string toString() override;
-    virtual ~NumericCard() override;
+
+	virtual ~NumericCard() override;
 };
+
 
 #endif

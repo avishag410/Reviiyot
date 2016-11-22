@@ -6,6 +6,7 @@
 #include "Card.h"
 
 using namespace std;
+using namespace Cards;
 
 class Deck {
 private:

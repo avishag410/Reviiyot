@@ -2,25 +2,13 @@
 #define Utils_H
 
 #include<iostream>
+#include<Card.h>
 using namespace std;
-
-enum Shape {
-	Club,
-	Diamond,
-	Heart,
-	Spade
-};
-
-enum Figure {
-	Jack,
-	Queen,
-	King,
-	Ace
-};
+using namespace Cards;
 
 class Utils
 {
 public:
-	static Shape parseShape(string shapeLetter);
+	static Cards::Shape parseShape(string shapeLetter);
 };
 #endif

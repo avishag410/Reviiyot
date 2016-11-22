@@ -1,22 +1,22 @@
 #include<iostream>
 #include<Utils.h>
 using namespace std;
+using namespace Cards;
 
 
-static Shape Utils::parseShape(string shapeLetter)
+Cards::Shape Utils::parseShape(string shapeLetter)
 {
 	//parse shape card
-	if (shapeStr.compare("C") == 0 )
-		return Club;
-	else if (shapeStr.compare("D") == 0 )
-		return Diamond;
-	else if (shapeStr.compare("H") == 0 )
-		return Heart;
-	else if (shapeStr.compare("S") == 0 )
-		return Spade;
+	if (shapeLetter.compare("C") == 0 )
+		return Cards::Shape::Club;
+	else if (shapeLetter.compare("D") == 0 )
+		return Cards::Shape::Diamond;
+	else if (shapeLetter.compare("H") == 0 )
+		return Cards::Shape::Heart;
+	else if (shapeLetter.compare("S") == 0 )
+		return Cards::Shape::Spade;
 	else{
 		throw invalid_argument("FigureClass: Not a valid shape");
-		return null;
 	}
 
 }

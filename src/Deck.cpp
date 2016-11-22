@@ -2,6 +2,7 @@
 #include <vector>
 #include <Deck.h>
 
+using namespace Cards;
 
 Deck::Deck(std::string cards)
 {
@@ -21,16 +22,16 @@ Deck::Deck(std::string cards)
 // when the constructor is called with the string of cards, we will split it, then we will get the total of cards
 // then we can initialize the vector with a size and run reverse iterators, so when we need to fetch card, we will fetch
 // the one from the top. also if when need to print the vector, we will run reverse iterator ;)
-Deck::Card* fetchCard(){
+Card* Deck::fetchCard(){
 
     // TODO copy constructor or operator = then will not be null reference
-    Card* result = Deck::cards[Deck::cards.size-1];
+    Card* result = Deck::cards[Deck::cards.size()-1];
     Deck::cards.pop_back();
 
     return result;
 }
 int Deck::getNumberOfCards(){
-    return Deck::cards.size;
+    return Deck::cards.size();
 }
 string Deck::toString(){
     string result = "";
