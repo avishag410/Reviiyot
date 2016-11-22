@@ -1,17 +1,17 @@
 #include<KeyGenerator.h>
 #include<iostream>
 #include<exception>
-#include <Utils.h>
+#include "Utils.h"
 #include "../include/Card.h"
 
-using namespace Cards;
+//using namespace Cards;
 
 KeyGenerator::KeyGenerator(int n):N(n){}
 
 int KeyGenerator::generate(string cardString)
 {
 	string shapeStr,valueStr;
-	Shape shape;
+	Cards::Shape shape;
 	int value,result;
 	
 	//parse the card represented string

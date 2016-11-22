@@ -1,7 +1,7 @@
 #include<iostream>
 #include<Utils.h>
 using namespace std;
-using namespace Cards;
+//using namespace Cards;
 
 
 Cards::Shape Utils::parseShape(string shapeLetter)

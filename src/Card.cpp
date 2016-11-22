@@ -1,9 +1,10 @@
 #include<iostream>
 #include<Card.h>
 
+using namespace std;
 using namespace Cards;
 
-int Card::get_key() const
+int Card::get_key() 
 {
 	//TODO:exceptions?
 	return key;
@@ -27,3 +28,4 @@ void set_shape(Cards::Shape nShape){
 Card::~Card(void){
 
 }
+

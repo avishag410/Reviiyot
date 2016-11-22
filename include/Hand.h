@@ -12,6 +12,7 @@ private:
     // Declare here the collection of "Card *" of the hand
 	//<key,ptr_to_card_obj>
 	map<int,Card*> hashMap;
+	int numOfCards;
 public:
     bool addCard(Card &card);
     bool removeCard(Card &card);
