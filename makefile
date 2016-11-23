@@ -4,8 +4,8 @@ CFLAGS=-g -Wall -Weffc++ -std=c++11 -c -Iinclude
 
 #All Targets
 all: Reviiyot
-Reviiyot: Main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o
-	$(CC) Main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o -o Reviiyot
+Reviiyot: Main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o Hand.o Player.o
+	$(CC) Main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o Hand.o Player.o -o Reviiyot
 
 Main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
@@ -24,6 +24,9 @@ Deck.o: src/Deck.cpp
 	$(CC) $(CFLAGS) src/Deck.cpp
 Utils.o: src/Utils.cpp
 	$(CC) $(CFLAGS) src/Utils.cpp
-
+Player.o: src/Player.cpp
+	$(CC) $(CFLAGS) src/Player.cpp
+Hand.o: src/Hand.cpp
+	$(CC) $(CFLAGS) src/Hand.cpp
 clean:
 	rm -rf *.o Reviiyot

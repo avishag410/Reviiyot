@@ -2,7 +2,7 @@
 #define HAND_H_
 
 #include <iostream>
-
+#include <map>
 #include "Card.h"
 
 using namespace std;
@@ -14,6 +14,7 @@ private:
 	map<int,Card*> hashMap;
 	int numOfCards;
 public:
+	Hand();
     bool addCard(Card &card);
     bool removeCard(Card &card);
 	//TODO search for card

@@ -1,11 +1,8 @@
-#incldue <iostream>
+#include <iostream>
 #include <map>
 #include "Hand.h"
 
 using namespace std;
-/*
-	Hand.cpp
-*/
 
 Hand::Hand()
 {
@@ -19,18 +16,20 @@ bool Hand::addCard(Card &card)
     ret = hashMap.insert( pair<int,Card*>(card.get_key(),&card) );
 	
 	//delete taked card?
-	numOfCard++;
+	numOfCards++;
 	
 	return ret.second;
 }
 
 bool Hand::removeCard(Card &card)
 {
+	// what is the use of ret?!
 	pair<map<int,Card*>::iterator,bool> ret;
 	map<int,Card*>::iterator removeIt;
 	
-	removeIt=HashMap.find( card.get_key() );
-	ret=HashMap.erase(removeIt);
+	removeIt=hashMap.find( card.get_key() );
+	// remove using iterator is void!
+	hashMap.erase(removeIt);
 	
 	numOfCards--;
 	
@@ -39,18 +38,19 @@ bool Hand::removeCard(Card &card)
 
 int Hand::getNumberOfCards()
 {
-	return numOfCard;
+	return numOfCards;
 }
 
 string Hand::toString()
 {
+	string result = "";
 	map<int,Card*>::iterator printIt;
 	
 	for(printIt=hashMap.begin() ; printIt!=hashMap.end() ; printIt++)
 	{
-		 (printIt.second)->toString();
+		result += (printIt->second)->toString();
 	}
-	
+	return result;
 }	
 	
 	
