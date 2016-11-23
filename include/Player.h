@@ -11,6 +11,7 @@ private:
     const string name;
 public:
     string getName();   //Returns the name of the player
+    string toString();
 };
 
 class PlayerType1 : public Player {  //For strategy 1
