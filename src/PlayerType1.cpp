@@ -25,6 +25,9 @@ void PlayerType1::makeMove(){
 }
 
 
+
+
+
 Card* PlayerType1::searchStrategyCard(){
 
     return NULL ;
