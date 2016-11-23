@@ -36,8 +36,3 @@ string FigureCard::toString(){
 FigureCard::~FigureCard(void){
 
 }
-
-virtual string FigureCard::toString() override
-{
-	return valueString;
-}

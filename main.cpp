@@ -22,6 +22,7 @@ int main() {
 
     std::cout << "deck->getNumberOfCards()"  << std::endl;
     std::cout << deck->getNumberOfCards() << std::endl;
-
+    std::cout << "deck->toString()"  << std::endl;
+    std::cout << deck->toString() << std::endl;
     return 0;
 }
