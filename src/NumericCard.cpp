@@ -26,6 +26,7 @@ NumericCard::NumericCard(const NumericCard &rhs)
 	valueString=rhs.valueString;
 	set_number(rhs.get_number());
 }
+
 NumericCard& NumericCard::operator=(const NumericCard& rhs)
 {
 	set_shape(rhs.get_shape());
