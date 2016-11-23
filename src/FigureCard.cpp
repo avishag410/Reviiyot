@@ -29,6 +29,23 @@ FigureCard::FigureCard(string cardStr) {
 		throw invalid_argument("FigureClass: Not a valid value");
 }
 
+FigureCard::FigureCard(const FigureCard &rhs)
+{
+	set_shape(rhs.get_shape());
+	set_key(rhs.get_key());
+	valueString=rhs.valueString;
+	set_figure(rhs.get_figure());
+}
+
+FigureCard& FigureCard::operator=(const FigureCard& rhs)
+{
+	set_shape(rhs.get_shape());
+	set_key(rhs.get_key());
+	valueString=rhs.valueString;
+	set_figure(rhs.get_figure());
+	
+	return *this;
+}
 string FigureCard::toString()
 {
     return valueString;
@@ -39,7 +56,7 @@ void FigureCard::set_figure(Cards::Figure f)
 	figure=f;
 }
 	
-Cards::Figure FigureCard::get_Figure() const
+Cards::Figure FigureCard::get_figure() const
 {
 	return figure;
 }
