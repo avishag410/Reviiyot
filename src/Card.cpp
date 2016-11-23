@@ -5,7 +5,7 @@
 using namespace std;
 using namespace Cards;
 
-int Card::get_key() 
+int Card::get_key() const
 {
 	//TODO:exceptions?
 	return 10; // Card::key;
@@ -22,15 +22,18 @@ int Card::compare(Card &otherCard)
 	return ( this->get_key() ) - ( otherCard.get_key() );
 }
 
-void Card::set_shape(Cards::Shape nShape){
+void Card::set_shape(Cards::Shape nShape)
+{
 	shape = nShape;
 }
 
-Cards::Shape Card::get_shape(){
+Cards::Shape Card::get_shape() const
+{
 	return shape;
 }
 
-Card::~Card(void){
+Card::~Card()
+{
 
 }
 
