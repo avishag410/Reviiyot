@@ -12,7 +12,10 @@ private:
 public:
     string getName();   //Returns the name of the player
     string toString();
-    virtual void makeMove() = 0;
+    virtual bool makeMove() = 0;
+    virtual void drawCard() = 0;
+    virtual Card* giveCards() = 0;
+
 private:
     virtual Card* SearchStrategyCard() = 0;
     virtual Player* SearchStrategyPlayer() = 0;
@@ -20,7 +23,9 @@ private:
 
 class PlayerType1 : public Player {
 public:
-    virtual void makeMove() override;
+    virtual bool makeMove() override;
+    virtual void drawCard() override;
+    virtual Card* giveCards() override;
 
 private:
     virtual Card* SearchStrategyCard() override ;
@@ -29,7 +34,9 @@ private:
 
 class PlayerType2 : public Player {
 public:
-    virtual void makeMove() override;
+    virtual bool makeMove() override;
+    virtual void drawCard() override;
+    virtual Card* giveCards() override;
 private:
     virtual Card* SearchStrategyCard() override ;
     virtual Player* SearchStrategyPlayer() override ;
@@ -37,7 +44,9 @@ private:
 
 class PlayerType3 : public Player {
 public:
-    virtual void makeMove() override;
+    virtual bool makeMove() override;
+    virtual void drawCard() override;
+    virtual Card* giveCards() override;
 private:
     int playerIndex;
     virtual Card* SearchStrategyCard() override ;
@@ -46,7 +55,9 @@ private:
 
 class PlayerType4 : public Player {
 public:
-    virtual void makeMove() override;
+    virtual bool makeMove() override;
+    virtual void drawCard() override;
+    virtual Card* giveCards() override;
 private:
     int playerIndex;
     virtual Card* SearchStrategyCard() override ;
