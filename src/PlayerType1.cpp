@@ -3,6 +3,7 @@
 #include <Hand.h>
 #include <Player.h>
 #include <Card.h>
+#include "../include/Player.h"
 
 using namespace std;
 
@@ -30,13 +31,35 @@ Card* PlayerType1::searchStrategyCard(){
 }
 
 Player* PlayerType1::searchStrategyPlayer(){
-    return NULL ;
+    int cardsAmount =0;
+    Player* result;
+    vector<Player*>::iterator it;
+    for(it=Player::players.begin() ; it < Player::players.end(); it++ ) {
+        if(cardsAmount <= (*it)->getNumberOfCards() && this != *it) {
+            cardsAmount = (*it)->getNumberOfCards();
+            result = *it;
+        }
+    }
+
+    return result;
 }
 
 void PlayerType2::makeMove(){
     // search for the least-lower card
+    Card* card = PlayerType2::searchStrategyCard();
     // choose the player with the most cards
     // if there are two, then choose the one in higher position (whats that means?)
+    Player* player = PlayerType2::searchStrategyPlayer();
+    vector<Card*> given = player->giveCards(card->toString());
+
+    if(given.size() > 0) {
+        vector<Card*>::iterator it;
+        for(it=given.begin() ; it < given.end(); it++ ) {
+            //Hand::addCard(it);
+        }
+    } else{
+        Player::drawCard();
+    }
 }
 
 Card* PlayerType2::searchStrategyCard(){
@@ -44,7 +67,17 @@ Card* PlayerType2::searchStrategyCard(){
 }
 
 Player* PlayerType2::searchStrategyPlayer(){
-    return NULL ;
+    int cardsAmount =0;
+    Player* result;
+    vector<Player*>::iterator it;
+    for(it=Player::players.begin() ; it < Player::players.end(); it++ ) {
+        if(cardsAmount <= (*it)->getNumberOfCards() && this != *it) {
+            cardsAmount = (*it)->getNumberOfCards();
+            result = *it;
+        }
+    }
+
+    return result;
 }
 
 void PlayerType3::makeMove(){

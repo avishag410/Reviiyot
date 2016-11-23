@@ -13,13 +13,14 @@ private:
     const string name;
     Deck* deck;
 public:
-    Player(Deck* deck);
+    Player(Deck* deck, vector<Player*> players);
     string getName();   //Returns the name of the player
     string toString();
     virtual void makeMove() = 0;
     vector<Card*> giveCards(string value);
 
 protected:
+    vector<Player*> players;
     virtual Card* searchStrategyCard() = 0;
     virtual Player* searchStrategyPlayer() = 0;
     void drawCard();
@@ -27,7 +28,7 @@ protected:
 
 class PlayerType1 : public Player {
 public:
-    PlayerType1(Deck* deck);
+    PlayerType1(Deck* deck, vector<Player*> players);
     virtual void makeMove() override;
 
 private:
@@ -37,7 +38,7 @@ private:
 
 class PlayerType2 : public Player {
 public:
-    PlayerType2(Deck* deck);
+    PlayerType2(Deck* deck, vector<Player*> players);
     virtual void makeMove() override;
 private:
     virtual Card* searchStrategyCard() override ;
@@ -46,7 +47,7 @@ private:
 
 class PlayerType3 : public Player {
 public:
-    PlayerType3(Deck* deck);
+    PlayerType3(Deck* deck, vector<Player*> players);
     virtual void makeMove() override;
 private:
     int playerIndex;
@@ -56,7 +57,7 @@ private:
 
 class PlayerType4 : public Player {
 public:
-    PlayerType4(Deck* deck);
+    PlayerType4(Deck* deck, vector<Player*> players);
     virtual void makeMove() override;
 private:
     int playerIndex;
