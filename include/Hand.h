@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <map>
+#include <vector>
 #include "Card.h"
 
 using namespace std;
@@ -13,6 +14,9 @@ private:
 	//<key,ptr_to_card_obj>
 	map<int,Card*> hashMap;
 	int numOfCards;
+
+protected:
+    vector<Card*> searchCardsByValue(string value);
 public:
 	Hand();
     bool addCard(Card &card);

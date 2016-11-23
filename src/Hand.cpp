@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <vector>
 #include "Hand.h"
 
 using namespace std;
@@ -51,6 +52,9 @@ string Hand::toString()
 		result += (printIt->second)->toString();
 	}
 	return result;
-}	
-	
+}
+
+vector<Card*> Hand::searchCardsByValue(string value){
+    return vector<Card*>();
+}
 	

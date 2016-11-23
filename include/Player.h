@@ -2,66 +2,66 @@
 #define PLAYER_H_
 
 #include <iostream>
+#include <vector>
 #include <Hand.h>
+#include <Deck.h>
 
 using namespace std;
 
 class Player : public Hand {
 private:
     const string name;
+    Deck* deck;
 public:
+    Player(Deck* deck);
     string getName();   //Returns the name of the player
     string toString();
-    virtual bool makeMove() = 0;
-    virtual void drawCard() = 0;
-    virtual Card* giveCards() = 0;
+    virtual void makeMove() = 0;
+    vector<Card*> giveCards(string value);
 
-private:
-    virtual Card* SearchStrategyCard() = 0;
-    virtual Player* SearchStrategyPlayer() = 0;
+protected:
+    virtual Card* searchStrategyCard() = 0;
+    virtual Player* searchStrategyPlayer() = 0;
+    void drawCard();
 };
 
 class PlayerType1 : public Player {
 public:
-    virtual bool makeMove() override;
-    virtual void drawCard() override;
-    virtual Card* giveCards() override;
+    PlayerType1(Deck* deck);
+    virtual void makeMove() override;
 
 private:
-    virtual Card* SearchStrategyCard() override ;
-    virtual Player* SearchStrategyPlayer() override ;
+    virtual Card* searchStrategyCard() override ;
+    virtual Player* searchStrategyPlayer() override ;
 };
 
 class PlayerType2 : public Player {
 public:
-    virtual bool makeMove() override;
-    virtual void drawCard() override;
-    virtual Card* giveCards() override;
+    PlayerType2(Deck* deck);
+    virtual void makeMove() override;
 private:
-    virtual Card* SearchStrategyCard() override ;
-    virtual Player* SearchStrategyPlayer() override ;
+    virtual Card* searchStrategyCard() override ;
+    virtual Player* searchStrategyPlayer() override ;
 };
 
 class PlayerType3 : public Player {
 public:
-    virtual bool makeMove() override;
-    virtual void drawCard() override;
-    virtual Card* giveCards() override;
+    PlayerType3(Deck* deck);
+    virtual void makeMove() override;
 private:
     int playerIndex;
-    virtual Card* SearchStrategyCard() override ;
-    virtual Player* SearchStrategyPlayer() override ;
+    virtual Card* searchStrategyCard() override ;
+    virtual Player* searchStrategyPlayer() override ;
 };
 
 class PlayerType4 : public Player {
 public:
-    virtual bool makeMove() override;
-    virtual void drawCard() override;
-    virtual Card* giveCards() override;
+    PlayerType4(Deck* deck);
+    virtual void makeMove() override;
 private:
     int playerIndex;
-    virtual Card* SearchStrategyCard() override ;
-    virtual Player* SearchStrategyPlayer() override ;
+    virtual Card* searchStrategyCard() override ;
+    virtual Player* searchStrategyPlayer() override ;
 };
 
 #endif

@@ -1,95 +1,77 @@
 #include <iostream>
+#include <vector>
 #include <Hand.h>
 #include <Player.h>
 #include <Card.h>
 
 using namespace std;
 
-bool PlayerType1::makeMove(){
+void PlayerType1::makeMove(){
     // search for the most-higher card
+    Card* card = PlayerType1::searchStrategyCard();
     // choose the player with the most cards
-    // if there are two, then choose the one in higher position (whats that means?)
-    return false;
+    // if there are two, then choose the one in higher position (whats that means?)c
+    Player* player = PlayerType1::searchStrategyPlayer();
+    vector<Card*> given = player->giveCards(card->toString());
+    if(given.size() > 0) {
+        vector<Card*>::iterator it;
+        for(it=given.begin() ; it < given.end(); it++ ) {
+            //Hand::addCard(it);
+        }
+    } else{
+        Player::drawCard();
+    }
 }
 
-void PlayerType1::drawCard(){
 
-}
-Card* PlayerType1::giveCards() {
-    return NULL;
-}
+Card* PlayerType1::searchStrategyCard(){
 
-Card* PlayerType1::SearchStrategyCard(){
     return NULL ;
 }
 
-Player* PlayerType1::SearchStrategyPlayer(){
+Player* PlayerType1::searchStrategyPlayer(){
     return NULL ;
 }
 
-bool PlayerType2::makeMove(){
+void PlayerType2::makeMove(){
     // search for the least-lower card
     // choose the player with the most cards
     // if there are two, then choose the one in higher position (whats that means?)
-    return false;
 }
 
-void PlayerType2::drawCard(){
-
-}
-Card* PlayerType2::giveCards() {
-    return NULL;
-}
-
-Card* PlayerType2::SearchStrategyCard(){
+Card* PlayerType2::searchStrategyCard(){
     return NULL ;
 }
 
-Player* PlayerType2::SearchStrategyPlayer(){
+Player* PlayerType2::searchStrategyPlayer(){
     return NULL ;
 }
 
-bool PlayerType3::makeMove(){
+void PlayerType3::makeMove(){
     // counter - cyclic order
 
     // search for the higher card
 
-    return false;
 }
 
-void PlayerType3::drawCard(){
-
-}
-Card* PlayerType3::giveCards() {
-    return NULL;
-}
-
-Card* PlayerType3::SearchStrategyCard(){
+Card* PlayerType3::searchStrategyCard(){
     return NULL ;
 }
 
-Player* PlayerType3::SearchStrategyPlayer(){
+Player* PlayerType3::searchStrategyPlayer(){
     return NULL ;
 }
 
-bool PlayerType4::makeMove(){
+void PlayerType4::makeMove(){
     // counter - cyclic order
 
     // search for the lowest card
-    return false;
 }
 
-void PlayerType4::drawCard(){
-
-}
-Card* PlayerType4::giveCards() {
-    return NULL;
-}
-
-Card* PlayerType4::SearchStrategyCard(){
+Card* PlayerType4::searchStrategyCard(){
     return NULL ;
 }
 
-Player* PlayerType4::SearchStrategyPlayer(){
+Player* PlayerType4::searchStrategyPlayer(){
     return NULL ;
 }
