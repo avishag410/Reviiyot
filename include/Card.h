@@ -41,11 +41,9 @@ public:
 	int compare(Card &otherCard);
 
 	int get_key() ;
-
 	void set_key(int key);
 
 	void set_shape(Cards::Shape nShape);
-
 	Cards::Shape get_shape();
 };
 
