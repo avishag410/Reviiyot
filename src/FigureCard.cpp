@@ -29,10 +29,23 @@ FigureCard::FigureCard(string cardStr) {
 		throw invalid_argument("FigureClass: Not a valid value");
 }
 
-string FigureCard::toString(){
+string FigureCard::toString()
+{
     return valueString;
 }
 
-FigureCard::~FigureCard(void){
-
+void FigureCard::set_figure(Cards::Figure f)
+{
+	figure=f;
+}
+	
+Cards::Figure FigureCard::get_Figure() const
+{
+	return figure;
+}
+	
+	
+FigureCard::~FigureCard()
+{
+	
 }

@@ -23,7 +23,6 @@ int KeyGenerator::generate(string cardString)
 	
 	//parse value card
 	//figure card
-	// TODO does this also need to be *4?
 	if (valueStr.compare("J")==0)
 		value=(N+1+ static_cast<int>(Cards::Figure::Jack)*4);
 	else if (valueStr.compare("Q")==0)

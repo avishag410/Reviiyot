@@ -40,11 +40,11 @@ public:
 	*/
 	int compare(Card &otherCard);
 
-	int get_key() ;
+	int get_key() const;
 	void set_key(int key);
 
 	void set_shape(Cards::Shape nShape);
-	Cards::Shape get_shape();
+	Cards::Shape get_shape() const;
 };
 
 class FigureCard : public Card {
@@ -56,7 +56,8 @@ public:
 
 	//TODO: Add copy ctor & copy assignment op
 	virtual string toString() override;
-
+	void set_figure(Cards::Figure f);
+	Cards::Figure get_Figure() const;
 	virtual ~FigureCard() override;
 
 };
@@ -70,7 +71,8 @@ public:
 
 	//TODO: Add copy ctor & copy assignment op
 	virtual string toString() override;
-
+	void set_number(int n);
+	int get_number() const;
 	virtual ~NumericCard() override;
 };
 

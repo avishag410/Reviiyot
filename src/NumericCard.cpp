@@ -20,6 +20,14 @@ NumericCard::NumericCard(string cardStr){
 	number=stoi(valueStr);
 }
 
+void NumericCard::set_number(int n)
+{
+	number=n;
+}
+int NumericCard::get_number() const
+{
+	return number;
+}
 string NumericCard::toString(){
 	return valueString;
 }
