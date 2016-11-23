@@ -38,6 +38,5 @@ int KeyGenerator::generate(string cardString)
 		
 		
 	result=value+shape;
-	std::cout << result << std::endl;
 	return result;
 }

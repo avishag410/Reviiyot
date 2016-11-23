@@ -15,7 +15,6 @@ NumericCard::NumericCard(string cardStr){
 	string valueStr=valueString.substr(0,valueString.size()-1);
 
 	Cards::Shape shape = Utils::parseShape(shapeStr);
-	std::cout << shape << std::endl;
 	Card::set_shape(shape);
 	
 	number=stoi(valueStr);
