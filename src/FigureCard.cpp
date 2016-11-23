@@ -36,6 +36,16 @@ FigureCard::FigureCard(const FigureCard &rhs)
 	valueString=rhs.valueString;
 	set_figure(rhs.get_figure());
 }
+
+FigureCard& FigureCard::operator=(const FigureCard& rhs)
+{
+	set_shape(rhs.get_shape());
+	set_key(rhs.get_key());
+	valueString=rhs.valueString;
+	set_figure(rhs.get_figure());
+	
+	return *this;
+}
 string FigureCard::toString()
 {
     return valueString;
