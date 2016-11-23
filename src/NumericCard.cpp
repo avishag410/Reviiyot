@@ -19,6 +19,13 @@ NumericCard::NumericCard(string cardStr){
 	
 	number=stoi(valueStr);
 }
+NumericCard::NumericCard(const NumericCard &rhs)
+{
+	set_shape(rhs.get_shape());
+	set_key(rhs.get_key());
+	valueString=rhs.valueString;
+	set_number(rhs.get_number());
+}
 
 void NumericCard::set_number(int n)
 {

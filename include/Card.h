@@ -53,11 +53,11 @@ private:
 	Cards::Figure figure;
 public:
 	FigureCard(string cardStr);
-
-	//TODO: Add copy ctor & copy assignment op
+	FigureCard(const FigureCard &rhs);
+	
 	virtual string toString() override;
 	void set_figure(Cards::Figure f);
-	Cards::Figure get_Figure() const;
+	Cards::Figure get_figure() const;
 	virtual ~FigureCard() override;
 
 };
@@ -68,8 +68,7 @@ private:
 	int number;
 public:
 	NumericCard(string cardStr);
-
-	//TODO: Add copy ctor & copy assignment op
+	NumericCard(const NumericCard &rhs);
 	virtual string toString() override;
 	void set_number(int n);
 	int get_number() const;
