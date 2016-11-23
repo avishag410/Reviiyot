@@ -5,22 +5,17 @@
 
 using namespace std;
 using namespace Cards;
-/*
-	FigureClass.cpp
-*/
 
-FigureCard::FigureCard(string cardStr)
-{
+FigureCard::FigureCard(string cardStr) {
 	valueString=cardStr;
-	
+
 	//parse the card represented string
 	string shapeStr;
 	shapeStr=valueString.back();
 	string valueStr=valueString.substr(0,valueString.size()-1);
 	
-	//Cards::Shape  shape = Utils::parseShape(shapeStr);
-	//Card::set_shape(shape);
-	
+	Cards::Shape  shape = Utils::parseShape(shapeStr);
+	Card::set_shape(shape);
 	//parse figure char
 	if (valueStr.compare("J")==0)
 		figure=Cards::Figure::Jack;
@@ -35,14 +30,9 @@ FigureCard::FigureCard(string cardStr)
 }
 
 string FigureCard::toString(){
-    return "test";
+    return valueString;
 }
 
 FigureCard::~FigureCard(void){
 
-}
-
-virtual string FigureCard::toString() override
-{
-	return valueString;
 }
