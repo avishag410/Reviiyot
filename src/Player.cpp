@@ -35,6 +35,6 @@ vector<Card*> Player::giveCards(string value) {
 void Player::drawCard(){
     Card* card = gameManager->getCardFromDeck();
     if(card != NULL){
-      //  Hand::addCard(&card);
+        Hand::addCard(*card);
     }
 }
