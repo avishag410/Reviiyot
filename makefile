@@ -1,13 +1,13 @@
 CC=g++
 
-CFLAGS=-g -Wall -Werror -Weffc++ -std=c++11 -c -Iinclude
+CFLAGS=-g -Wall -Weffc++ -std=c++11 -c -Iinclude
 
 #All Targets
 all: Reviiyot
-Reviiyot: Main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o Hand.o Player.o PlayerType1.o GameManager.o Game.o
-	$(CC) Main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o Hand.o Player.o PlayerType1.o GameManager.o Game.o -o Reviiyot
+Reviiyot: main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o Hand.o Player.o PlayerType1.o GameManager.o Game.o
+	$(CC) main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o Hand.o Player.o PlayerType1.o GameManager.o Game.o -o Reviiyot
 
-Main.o: main.cpp
+main.o: main.cpp
 	$(CC) $(CFLAGS) main.cpp
 
 Card.o: src/Card.cpp
