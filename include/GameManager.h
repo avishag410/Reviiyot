@@ -1,11 +1,11 @@
 #ifndef GAMEMANAGER_H_
 #define GAMEMANAGER_H_
 
+class Player;
 #include <iostream>
 #include <vector>
-#import "Player.h"
-#include "Deck.h"
 #include "Card.h"
+#include "Deck.h"
 
 using namespace std;
 
@@ -21,6 +21,7 @@ public:
     Player* getPlayerWithMinCards(Player &player);
     Player* getPlayerByPosition(int position);
     Card* getCardFromDeck();
+    int getTotalOfPlayers();
 };
 
 #endif

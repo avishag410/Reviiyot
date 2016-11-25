@@ -5,64 +5,61 @@
 #include <vector>
 #include <Hand.h>
 #include <Deck.h>
+#include "GameManager.h"
 
 using namespace std;
 
 class Player : public Hand {
 private:
     const string name;
-    Deck* deck;
 public:
-    Player(Deck* deck, vector<Player*> players);
+    Player(GameManager::GameManager &gameManager);
     string getName();   //Returns the name of the player
     string toString();
     virtual void makeMove() = 0;
     vector<Card*> giveCards(string value);
 
 protected:
-    vector<Player*> players;
+    GameManager* gameManager;
     virtual Card* searchStrategyCard() = 0;
-    virtual Player* searchStrategyPlayer() = 0;
     void drawCard();
 };
 
 class PlayerType1 : public Player {
 public:
-    PlayerType1(Deck* deck, vector<Player*> players);
+    PlayerType1(GameManager::GameManager gameManager);
     virtual void makeMove() override;
 
 private:
     virtual Card* searchStrategyCard() override ;
-    virtual Player* searchStrategyPlayer() override ;
 };
 
 class PlayerType2 : public Player {
 public:
-    PlayerType2(Deck* deck, vector<Player*> players);
+    PlayerType2(GameManager::GameManager gameManager);
     virtual void makeMove() override;
 private:
     virtual Card* searchStrategyCard() override ;
-    virtual Player* searchStrategyPlayer() override ;
 };
 
 class PlayerType3 : public Player {
 public:
-    PlayerType3(Deck* deck, vector<Player*> players);
+    PlayerType3(GameManager::GameManager gameManager, int selfPosition);
     virtual void makeMove() override;
 private:
     int playerIndex;
+    int selfPosition;
     virtual Card* searchStrategyCard() override ;
-    virtual Player* searchStrategyPlayer() override ;
 };
 
 class PlayerType4 : public Player {
 public:
-    PlayerType4(Deck* deck, vector<Player*> players);
+    PlayerType4(GameManager::GameManager gameManager, int selfPosition);
     virtual void makeMove() override;
 private:
     int playerIndex;
+    int selfPosition;
     virtual Card* searchStrategyCard() override ;
-    virtual Player* searchStrategyPlayer() override ;
 };
 
 #endif

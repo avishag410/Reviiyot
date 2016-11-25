@@ -2,8 +2,8 @@
 #include<Player.h>
 #include <map>
 #include <vector>
-#include "../include/Player.h"
-#include "../include/Hand.h"
+#include <Hand.h>
+#include <GameManager.h>
 
 string Player::getName(){
     return name;
@@ -23,7 +23,7 @@ vector<Card*> Player::giveCards(string value) {
 }
 
 void Player::drawCard(){
-    Card* card = deck->fetchCard();
+    Card* card = gameManager->getCardFromDeck();
     if(card != NULL){
       //  Hand::addCard(&card);
     }
