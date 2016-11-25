@@ -26,7 +26,7 @@ Player* GameManager::getPlayerWithMaxCards(Player &player){
     Player* result;
     vector<Player*>::iterator it1;
     for(it1=GameManager::players.begin(); it1 < GameManager::players.end(); it1++ ) {
-        if(cardsAmount <= (*it1)->getNumberOfCards()) {
+        if(cardsAmount <= (*it1)->getNumberOfCards() && &player != *it1) {
             cardsAmount = (*it1)->getNumberOfCards();
             result = *it1;
         }
@@ -35,14 +35,37 @@ Player* GameManager::getPlayerWithMaxCards(Player &player){
     return result;
 }
 Player* GameManager::getPlayerWithMinCards(){
-    return  NULL;
+    int cardsAmount = INT_MAX;
+    Player* result;
+    vector<Player*>::iterator it1;
+    for(it1=GameManager::players.begin(); it1 < GameManager::players.end(); it1++ ) {
+        if(cardsAmount > (*it1)->getNumberOfCards()) {
+            cardsAmount = (*it1)->getNumberOfCards();
+            result = *it1;
+        }
+    }
+
+    return result;
 }
 Player* GameManager::getPlayerWithMinCards(Player &player){
-    return  NULL;
+    int cardsAmount = INT_MAX;
+    Player* result;
+    vector<Player*>::iterator it1;
+    for(it1=GameManager::players.begin(); it1 < GameManager::players.end(); it1++ ) {
+        if(cardsAmount > (*it1)->getNumberOfCards() && &player != *it1) {
+            cardsAmount = (*it1)->getNumberOfCards();
+            result = *it1;
+        }
+    }
+
+    return result;
 }
 Player* GameManager::getPlayerByPosition(int position){
-    return  NULL;
+    if(position <= GameManager::players.size())
+        return  GameManager::players[position];
+    else
+        return NULL;
 }
 Card* GameManager::getCardFromDeck(){
-    return  NULL;
+    return  GameManager::deck->fetchCard();
 }

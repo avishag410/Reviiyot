@@ -70,10 +70,7 @@ private:
 public:
 	NumericCard(string cardStr);
 	NumericCard(const NumericCard &rhs);
-<<<<<<< HEAD
 	NumericCard& operator=(const NumericCard& rhs);
-=======
->>>>>>> refs/remotes/origin/master
 	virtual string toString() override;
 	void set_number(int n);
 	int get_number() const;
