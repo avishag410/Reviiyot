@@ -6,7 +6,9 @@
 
 int main() {
     std::cout << "Hello, World!" << std::endl;
-    Deck* deck = new Deck("2H KD QS QC AS KC QH 2S 2D AH AD QD AC KH 2C KS JC JS JD JH 3C 3S 3D 3H");
+	int N=3;//depents on input file,for this example is 3
+	KeyGenerator *k=new KeyGenerator(N);
+	Deck* deck = new Deck("2H KD QS QC AS KC QH 2S 2D AH AD QD AC KH 2C KS JC JS JD JH 3C 3S 3D 3H",*k);
     std::cout << "deck->getNumberOfCards()"  << std::endl;
     std::cout << deck->getNumberOfCards() << std::endl;
     std::cout << "deck->toString()"  << std::endl;

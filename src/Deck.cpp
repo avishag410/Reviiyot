@@ -7,28 +7,34 @@
 using namespace Cards;
 using namespace std;
 
-Deck::Deck(string cards):cards(){
+Deck::Deck(string cards,KeyGenerator &k)
+{
     string delimiter = " ";
     size_t pos = 0;
     string token;
 
+
     // insert the new cards at the beginning, so the fetch card is from the end
     while ((pos = cards.find(delimiter)) != std::string::npos) {
         token = cards.substr(0, pos);
-        Deck::insertCard(token);
+        Deck::insertCard(token,k);
         cards.erase(0, pos + delimiter.length());
     }
-    Deck::insertCard(cards);
+	
+    Deck::insertCard(cards,k);
 }
 
-void Deck::insertCard(string cardStr){
+void Deck::insertCard(string cardStr,KeyGenerator &k){
     Card *card;
+	
     // create new card with a smart pointer
     if(Utils::isNumericCard(cardStr)){
         card = new NumericCard(cardStr);
     } else {
         card = new FigureCard(cardStr);
     }
+	int key=k.generate(cardStr);
+	card->set_key(key);
     Deck::cards.insert(Deck::cards.begin(), card);
 }
 
@@ -58,8 +64,8 @@ string Deck::toString(){
 }
 
 Deck::~Deck(){
-    vector<Card*>::iterator it;
-    for(it=cards.begin(); it < cards.end(); it++ ) {
-        delete *it;
-    }
+   for(int i = 0; i < Deck::cards.size(); i++){
+       Card* card = Deck::cards[i];
+       delete card;
+   }
 }
