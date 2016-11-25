@@ -30,19 +30,13 @@ protected:
 	string valueString;
 
 public:
+	Card(Cards::Shape shape, string value);
+	Card(const Card &rhs);//copy ctor
 	virtual string toString() = 0; //Returns the string representation of the card "<value><shape>" exp: "12S" or "QD"
 	virtual ~Card();
-
-	/*
-	returns 0 if equals
-	returns 1 if this>otherCard
-	returns -1 if this<otherCard
-	*/
-	int compare(Card &otherCard);
-
+	int compare(Card &otherCard); 	//returns 0 if equals returns 1 if this>otherCard returns -1 if this<otherCard
 	int get_key() const;
 	void set_key(int key);
-
 	void set_shape(Cards::Shape nShape);
 	Cards::Shape get_shape() const;
 };
@@ -53,7 +47,6 @@ private:
 	Cards::Figure figure;
 public:
 	FigureCard(string cardStr);
-
 	FigureCard(const FigureCard &rhs);//copy ctor
 	FigureCard& operator=(const FigureCard& rhs);
 	virtual string toString() override;

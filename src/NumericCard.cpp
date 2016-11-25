@@ -7,7 +7,7 @@
 using namespace std;
 using namespace Cards;
 
-NumericCard::NumericCard(string cardStr){
+NumericCard::NumericCard(string cardStr):Card(Cards::Shape::Club, cardStr) {
 	valueString=cardStr;
 	//parse the card represented string
 	string shapeStr;
@@ -19,11 +19,7 @@ NumericCard::NumericCard(string cardStr){
 	
 	number=stoi(valueStr);
 }
-NumericCard::NumericCard(const NumericCard &rhs)
-{
-	set_shape(rhs.get_shape());
-	set_key(rhs.get_key());
-	valueString=rhs.valueString;
+NumericCard::NumericCard(const NumericCard &rhs):Card(rhs) {
 	set_number(rhs.get_number());
 }
 

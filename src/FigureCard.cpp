@@ -6,9 +6,7 @@
 using namespace std;
 using namespace Cards;
 
-FigureCard::FigureCard(string cardStr) {
-	valueString=cardStr;
-
+FigureCard::FigureCard(string cardStr):Card(Cards::Shape::Club, cardStr) {
 	//parse the card represented string
 	string shapeStr;
 	shapeStr=valueString.back();
@@ -29,11 +27,7 @@ FigureCard::FigureCard(string cardStr) {
 		throw invalid_argument("FigureClass: Not a valid value");
 }
 
-FigureCard::FigureCard(const FigureCard &rhs)
-{
-	set_shape(rhs.get_shape());
-	set_key(rhs.get_key());
-	valueString=rhs.valueString;
+FigureCard::FigureCard(const FigureCard &rhs):Card(rhs) {
 	set_figure(rhs.get_figure());
 }
 

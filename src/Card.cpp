@@ -5,6 +5,10 @@
 using namespace std;
 using namespace Cards;
 
+Card::Card(Cards::Shape _shape, string _value):shape(_shape),key(-1) , valueString(_value) {}
+
+Card::Card(const Card &rhs):shape(rhs.shape), key(rhs.key), valueString(rhs.valueString) {}
+
 int Card::get_key() const
 {
 	//TODO:exceptions?
