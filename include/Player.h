@@ -56,7 +56,7 @@ private:
 
 class PlayerType3 : public Player {
 public:
-    PlayerType3(GameManager &gameManager, string name);
+    PlayerType3(GameManager &gameManager, string name, int _selfPosition);
     PlayerType3(const PlayerType3& other);
     virtual void makeMove() override;
     PlayerType3& operator=(const PlayerType3& other);
@@ -70,7 +70,7 @@ private:
 
 class PlayerType4 : public Player {
 public:
-    PlayerType4(GameManager &gameManager, string name);
+    PlayerType4(GameManager &gameManager, string name, int _selfPosition);
     PlayerType4(const PlayerType4& other);
     virtual void makeMove() override;
     PlayerType4& operator=(const PlayerType4& other);

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-PlayerType1::PlayerType1(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
+PlayerType1::PlayerType1(GameManager &gameManager, string name):Player::Player(gameManager,name){}
 void PlayerType1::makeMove(){
     // search for the most-higher card
     Card* card = PlayerType1::searchStrategyCard();
@@ -34,7 +34,7 @@ PlayerType1::~PlayerType1(){
 
 }
 
-PlayerType2::PlayerType2(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
+PlayerType2::PlayerType2(GameManager &gameManager, string name):Player::Player(gameManager,name){}
 void PlayerType2::makeMove(){
     // search for the least-lower card
     Card* card = PlayerType2::searchStrategyCard();
@@ -61,7 +61,7 @@ PlayerType2::~PlayerType2(){
 
 }
 
-PlayerType3::PlayerType3(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
+PlayerType3::PlayerType3(GameManager &gameManager, string name, int _selfPosition):Player::Player(gameManager,name), playerIndex(0), selfPosition(_selfPosition){}
 void PlayerType3::makeMove(){
     // counter - cyclic order
     int total = Player::gameManager->getTotalOfPlayers();
@@ -94,7 +94,7 @@ PlayerType3::~PlayerType3(){
 
 }
 
-PlayerType4::PlayerType4(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
+PlayerType4::PlayerType4(GameManager &gameManager, string name, int _selfPosition):Player::Player(gameManager,name), playerIndex(0), selfPosition(_selfPosition){}
 void PlayerType4::makeMove(){
     // counter - cyclic order
     int total = Player::gameManager->getTotalOfPlayers();

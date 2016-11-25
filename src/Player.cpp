@@ -8,7 +8,7 @@
 
 using namespace std;
 
-Player::Player(GameManager::GameManager &_gameManager, string _name): name(_name), gameManager(&_gameManager){}
+Player::Player(GameManager &_gameManager, string _name): name(_name), gameManager(&_gameManager){}
 
 Player::Player(const Player& other): name(other.name), gameManager(other.gameManager){}
 
@@ -30,7 +30,8 @@ vector<Card*> Player::giveCards(string value) {
         Hand::removeCard(**it);
     }
     // get cards from deck
-    for(int i = 0; i <= cards.size(); i++){
+    vector<Card*>::iterator it1;
+    for(it1=cards.begin(); it1 < cards.end(); it1++ ) {
         Player::drawCard();
     }
     return cards;

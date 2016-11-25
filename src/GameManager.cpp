@@ -1,14 +1,15 @@
 #include <iostream>
 #include <vector>
-#import <Player.h>
+#include <climits>
+#include <Player.h>
 #include <Deck.h>
 #include <Card.h>
 #include <GameManager.h>
 using namespace std;
 // TODO do I really need vector of player or a pointer to a vector?
-GameManager::GameManager(Deck& _deck):deck(&_deck) {}
+GameManager::GameManager(Deck& _deck):players(), deck(&_deck) {}
 
-GameManager::GameManager(const GameManager& other){
+GameManager::GameManager(const GameManager& other):players(), deck() {
    GameManager::copy(other);
 }
 
@@ -69,7 +70,7 @@ Player* GameManager::getPlayerWithMinCards(Player &player){
     return result;
 }
 Player* GameManager::getPlayerByPosition(int position){
-    if(position < players.size())
+    if(position < static_cast<int>(players.size()))
         return  players[position];
     else
         return NULL;
@@ -85,8 +86,9 @@ int GameManager::getTotalOfPlayers(){
 
 GameManager &GameManager::operator=(const GameManager& other){
     if(this != &other){
-        for(int i = 0; i < players.size(); i++){
-            delete players[i];
+        vector<Player*>::iterator it;
+        for(it=players.begin() ; it < players.end(); it++) {
+            delete *it;
         }
 
         GameManager::copy(other);
@@ -95,7 +97,11 @@ GameManager &GameManager::operator=(const GameManager& other){
 }
 
 void GameManager::copy(const GameManager& other){
-    for(int i = 0; i < other.players.size(); i++){
-        players[i] = other.players[i];
+
+    int i = 0;
+    vector<Player*> temp = other.players;
+    vector<Player*>::iterator it;
+    for(it=temp.begin() ; it < temp.end(); it++, i++ ) {
+        players[i] = *it;
     }
 }

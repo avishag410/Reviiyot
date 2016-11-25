@@ -7,8 +7,7 @@
 using namespace Cards;
 using namespace std;
 
-Deck::Deck(string cards)
-{
+Deck::Deck(string cards):cards(){
     string delimiter = " ";
     size_t pos = 0;
     string token;
@@ -59,8 +58,8 @@ string Deck::toString(){
 }
 
 Deck::~Deck(){
-   for(int i = 0; i < Deck::cards.size(); i++){
-       Card* card = Deck::cards[i];
-       delete card;
-   }
+    vector<Card*>::iterator it;
+    for(it=cards.begin(); it < cards.end(); it++ ) {
+        delete *it;
+    }
 }
