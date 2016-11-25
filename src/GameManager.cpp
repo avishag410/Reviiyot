@@ -65,7 +65,7 @@ Player* GameManager::getPlayerWithMinCards(Player &player){
     return result;
 }
 Player* GameManager::getPlayerByPosition(int position){
-    if(position <= players.size())
+    if(position < players.size())
         return  players[position];
     else
         return NULL;

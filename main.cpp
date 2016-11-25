@@ -18,7 +18,7 @@ int main() {
     std::cout << player1->toString() << std::endl;
     player1->addCard(*(deck->fetchCard()));
     std::cout << player1->toString() << std::endl;
-
+    std::cout << player1->getNumberOfCards() << std::endl;
     std::cout << "deck->toString()"  << std::endl;
     std::cout << deck->toString() << std::endl;
     players.push_back(player1);
@@ -29,11 +29,23 @@ int main() {
     std::cout << player12->toString() << std::endl;
     player12->addCard(*(deck->fetchCard()));
     std::cout << player12->toString() << std::endl;
+    std::cout << player12->getNumberOfCards() << std::endl;
+    std::cout << "deck->toString()"  << std::endl;
+    std::cout << deck->toString() << std::endl;
     players.push_back(player12);
 
     gameManager->setPlayers(players);
     //getTotalOfPlayers
     std::cout << gameManager->getTotalOfPlayers() << std::endl;
+
+    //getPlayerWithMaxCards
+    std::cout << gameManager->getPlayerWithMaxCards()->toString() << std::endl;
+    std::cout << gameManager->getPlayerWithMinCards()->toString() << std::endl;
+    std::cout << gameManager->getPlayerByPosition(1)->toString() << std::endl;
+    std::cout << gameManager->getPlayerByPosition(0)->toString() << std::endl;
+    std::cout << gameManager->getPlayerWithMaxCards(*player12)->toString() << std::endl;
+    std::cout << gameManager->getPlayerWithMinCards(*player1)->toString() << std::endl;
+    std::cout << gameManager->getCardFromDeck()->toString() << std::endl;
 
     return 0;
 }
