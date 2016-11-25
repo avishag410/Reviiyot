@@ -61,9 +61,20 @@ void PlayerType3::makeMove(){
     if(next == PlayerType3::selfPosition)
         next = (next+1) % total;
     PlayerType3::playerIndex = next;
-    //Player* toAsk = Player::gameManager->getPlayerByPosition(next);
+    Player* player = Player::gameManager->getPlayerByPosition(next);
     // search for the higher card
+    Card* card = PlayerType3::searchStrategyCard();
 
+    vector<Card*> given = player->giveCards(card->toString());
+
+    if(given.size() > 0) {
+        vector<Card*>::iterator it;
+        for(it=given.begin() ; it < given.end(); it++ ) {
+            //Hand::addCard(it);
+        }
+    } else{
+        Player::drawCard();
+    }
 }
 
 Card* PlayerType3::searchStrategyCard(){
@@ -78,9 +89,21 @@ void PlayerType4::makeMove(){
     if(next == PlayerType4::selfPosition)
         next = (next+1) % total;
     PlayerType4::playerIndex = next;
-    //Player* toAsk = Player::gameManager->getPlayerByPosition(next);
+    Player* player = Player::gameManager->getPlayerByPosition(next);
 
     // search for the lowest card
+    Card* card = PlayerType4::searchStrategyCard();
+
+    vector<Card*> given = player->giveCards(card->toString());
+
+    if(given.size() > 0) {
+        vector<Card*>::iterator it;
+        for(it=given.begin() ; it < given.end(); it++ ) {
+            //Hand::addCard(it);
+        }
+    } else{
+        Player::drawCard();
+    }
 }
 
 Card* PlayerType4::searchStrategyCard(){
