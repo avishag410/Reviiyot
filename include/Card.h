@@ -71,6 +71,7 @@ public:
 	NumericCard(string cardStr);
 	NumericCard(const NumericCard &rhs);
 	NumericCard& operator=(const NumericCard& rhs);
+
 	virtual string toString() override;
 	void set_number(int n);
 	int get_number() const;
