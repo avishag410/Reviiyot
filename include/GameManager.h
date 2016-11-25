@@ -13,8 +13,10 @@ class GameManager {
 private:
     vector<Player*> players;
     Deck* deck;
+    void copy(const GameManager& other);
 public:
     GameManager(Deck& deck);
+    GameManager(const GameManager& other);
     void setPlayers(vector<Player*> _players);
     Player* getPlayerWithMaxCards();
     Player* getPlayerWithMaxCards(Player &player);
@@ -23,6 +25,7 @@ public:
     Player* getPlayerByPosition(int position);
     Card* getCardFromDeck();
     int getTotalOfPlayers();
+    GameManager& operator=(const GameManager& other);
 };
 
 #endif

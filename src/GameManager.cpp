@@ -8,6 +8,10 @@ using namespace std;
 // TODO do I really need vector of player or a pointer to a vector?
 GameManager::GameManager(Deck& _deck):deck(&_deck) {}
 
+GameManager::GameManager(const GameManager& other){
+   GameManager::copy(other);
+}
+
 void GameManager::setPlayers(vector<Player*> _players){
     players = _players;
 }
@@ -76,4 +80,22 @@ Card* GameManager::getCardFromDeck(){
 
 int GameManager::getTotalOfPlayers(){
     return players.size();
+}
+
+
+GameManager &GameManager::operator=(const GameManager& other){
+    if(this != &other){
+        for(int i = 0; i < players.size(); i++){
+            delete players[i];
+        }
+
+        GameManager::copy(other);
+    }
+    return *this;
+}
+
+void GameManager::copy(const GameManager& other){
+    for(int i = 0; i < other.players.size(); i++){
+        players[i] = other.players[i];
+    }
 }

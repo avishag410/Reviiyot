@@ -57,4 +57,16 @@ string Hand::toString()
 vector<Card*> Hand::searchCardsByValue(string value){
     return vector<Card*>();
 }
+
+Hand::~Hand() {
+
+	string result = "";
+	map<int,Card*>::iterator printIt;
+
+	for(printIt=hashMap.begin() ; printIt!=hashMap.end() ; printIt++)
+	{
+		delete (*printIt).second;
+
+	}
+}
 	

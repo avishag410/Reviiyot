@@ -30,6 +30,10 @@ Card* PlayerType1::searchStrategyCard(){
     return NULL ;
 }
 
+PlayerType1::~PlayerType1(){
+
+}
+
 PlayerType2::PlayerType2(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
 void PlayerType2::makeMove(){
     // search for the least-lower card
@@ -51,6 +55,10 @@ void PlayerType2::makeMove(){
 
 Card* PlayerType2::searchStrategyCard(){
     return NULL ;
+}
+
+PlayerType2::~PlayerType2(){
+
 }
 
 PlayerType3::PlayerType3(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
@@ -81,6 +89,11 @@ Card* PlayerType3::searchStrategyCard(){
     return NULL ;
 }
 
+
+PlayerType3::~PlayerType3(){
+
+}
+
 PlayerType4::PlayerType4(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
 void PlayerType4::makeMove(){
     // counter - cyclic order
@@ -108,4 +121,9 @@ void PlayerType4::makeMove(){
 
 Card* PlayerType4::searchStrategyCard(){
     return NULL ;
+}
+
+
+PlayerType4::~PlayerType4(){
+
 }

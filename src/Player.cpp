@@ -4,10 +4,14 @@
 #include <vector>
 #include <Hand.h>
 #include <GameManager.h>
+#include "../include/Player.h"
 
 using namespace std;
 
 Player::Player(GameManager::GameManager &_gameManager, string _name): name(_name), gameManager(&_gameManager){}
+
+Player::Player(const Player& other): name(other.name), gameManager(other.gameManager){}
+
 
 string Player::getName(){
     return name;
@@ -37,4 +41,8 @@ void Player::drawCard(){
     if(card != NULL){
         Hand::addCard(*card);
     }
+}
+
+Player::~Player() {
+
 }
