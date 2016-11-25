@@ -5,6 +5,10 @@
 #include <Hand.h>
 #include <GameManager.h>
 
+using namespace std;
+
+Player::Player(GameManager::GameManager &_gameManager, string _name): name(_name), gameManager(&_gameManager){}
+
 string Player::getName(){
     return name;
 }

@@ -70,6 +70,6 @@ Card* GameManager::getCardFromDeck(){
     return  GameManager::deck->fetchCard();
 }
 
-int getTotalOfPlayers(){
+int GameManager::getTotalOfPlayers(){
     return GameManager::players.size();
 }
