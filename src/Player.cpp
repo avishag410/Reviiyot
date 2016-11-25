@@ -20,6 +20,12 @@ string Player::toString() {
 vector<Card*> Player::giveCards(string value) {
     // gets cards from deck
     vector<Card*> cards = Hand::searchCardsByValue(value);
+    // remove cards from hand
+    vector<Card*>::iterator it;
+    for(it=cards.begin(); it < cards.end(); it++ ) {
+        Hand::removeCard(**it);
+    }
+    // get cards from deck
     for(int i = 0; i <= cards.size(); i++){
         Player::drawCard();
     }
