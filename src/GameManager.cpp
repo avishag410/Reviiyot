@@ -12,7 +12,7 @@ Player* GameManager::getPlayerWithMaxCards(){
     int cardsAmount =0;
     Player* result;
     vector<Player*>::iterator it;
-    for(it=GameManager::players.begin() ; it < GameManager::players.end(); it++ ) {
+        for(it=GameManager::players.begin() ; it < GameManager::players.end(); it++ ) {
         if(cardsAmount <= (*it)->getNumberOfCards()) {
             cardsAmount = (*it)->getNumberOfCards();
             result = *it;
@@ -68,4 +68,8 @@ Player* GameManager::getPlayerByPosition(int position){
 }
 Card* GameManager::getCardFromDeck(){
     return  GameManager::deck->fetchCard();
+}
+
+int getTotalOfPlayers(){
+    return GameManager::players.size();
 }
