@@ -7,6 +7,7 @@
 
 using namespace std;
 
+PlayerType1::PlayerType1(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
 void PlayerType1::makeMove(){
     // search for the most-higher card
     Card* card = PlayerType1::searchStrategyCard();
@@ -29,6 +30,7 @@ Card* PlayerType1::searchStrategyCard(){
     return NULL ;
 }
 
+PlayerType2::PlayerType2(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
 void PlayerType2::makeMove(){
     // search for the least-lower card
     Card* card = PlayerType2::searchStrategyCard();
@@ -51,15 +53,15 @@ Card* PlayerType2::searchStrategyCard(){
     return NULL ;
 }
 
-
+PlayerType3::PlayerType3(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
 void PlayerType3::makeMove(){
     // counter - cyclic order
     int total = Player::gameManager->getTotalOfPlayers();
-    int next = (PlayerType3::playerIndex++) % total;
+    int next = (PlayerType3::playerIndex+1) % total;
     if(next == PlayerType3::selfPosition)
-        next = (next++) % total;
+        next = (next+1) % total;
     PlayerType3::playerIndex = next;
-    Player* toAsk = Player::gameManager->getPlayerByPosition(next);
+    //Player* toAsk = Player::gameManager->getPlayerByPosition(next);
     // search for the higher card
 
 }
@@ -68,14 +70,15 @@ Card* PlayerType3::searchStrategyCard(){
     return NULL ;
 }
 
+PlayerType4::PlayerType4(GameManager::GameManager &gameManager, string name):Player::Player(gameManager,name){}
 void PlayerType4::makeMove(){
     // counter - cyclic order
     int total = Player::gameManager->getTotalOfPlayers();
-    int next = (PlayerType4::playerIndex++) % total;
+    int next = (PlayerType4::playerIndex+1) % total;
     if(next == PlayerType4::selfPosition)
-        next = (next++) % total;
+        next = (next+1) % total;
     PlayerType4::playerIndex = next;
-    Player* toAsk = Player::gameManager->getPlayerByPosition(next);
+    //Player* toAsk = Player::gameManager->getPlayerByPosition(next);
 
     // search for the lowest card
 }
