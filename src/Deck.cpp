@@ -8,17 +8,21 @@ using namespace Cards;
 using namespace std;
 
 Deck::Deck(string cards):cards(){
-    string delimiter = " ";
-    size_t pos = 0;
-    string token;
+    if(cards.size() > 0) {
+        string delimiter = " ";
+        size_t pos = 0;
+        string token;
 
-    // insert the new cards at the beginning, so the fetch card is from the end
-    while ((pos = cards.find(delimiter)) != std::string::npos) {
-        token = cards.substr(0, pos);
-        Deck::insertCard(token);
-        cards.erase(0, pos + delimiter.length());
+        // insert the new cards at the beginning, so the fetch card is from the end
+        while ((pos = cards.find(delimiter)) != std::string::npos) {
+            std::cout << "enter deck while" << std::endl;
+            token = cards.substr(0, pos);
+            std::cout << token << std::endl;
+            Deck::insertCard(token);
+            cards.erase(0, pos + delimiter.length());
+        }
+        Deck::insertCard(cards);
     }
-    Deck::insertCard(cards);
 }
 
 void Deck::insertCard(string cardStr){

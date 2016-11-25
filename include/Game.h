@@ -2,7 +2,7 @@
 #define GAME_H_
 
 #include <iostream>
-
+#include <fstream>
 #include "Player.h"
 #include "Deck.h"
 
@@ -12,6 +12,8 @@ class Game {
 private:
     vector<Player *> players;  //The list of the players
     Deck deck;                 //The deck of the game
+    void file_reader(string path);
+    void stream_reader(istream& stream, string line);
 public:
     Game(char* configurationFile);
     void init();
