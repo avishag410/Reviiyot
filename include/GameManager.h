@@ -14,7 +14,8 @@ private:
     vector<Player*> players;
     Deck* deck;
 public:
-    GameManager(Deck& deck, vector<Player*> player);
+    GameManager(Deck& deck);
+    void setPlayers(vector<Player*> _players);
     Player* getPlayerWithMaxCards();
     Player* getPlayerWithMaxCards(Player &player);
     Player* getPlayerWithMinCards();

@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <Player.h>
+#include <GameManager.h>
 #include "include/Deck.h"
 
 int main() {
@@ -8,21 +11,29 @@ int main() {
     std::cout << deck->getNumberOfCards() << std::endl;
     std::cout << "deck->toString()"  << std::endl;
     std::cout << deck->toString() << std::endl;
-    Card* card = deck->fetchCard();
-    while(card != NULL){
-        std::cout << "card->get_key()" << std::endl;
-        std::cout << card->get_key() << std::endl;
-        std::cout << "card->get_shape() " << std::endl;
-        std::cout << card->get_shape() << std::endl;
-        std::cout << "card->toString() " << std::endl;
-        std::cout << card->toString() << std::endl;
-        card = deck->fetchCard();
+    GameManager* gameManager = new GameManager(*deck);
+    std::vector<Player*> players;
+    PlayerType1* player1 = new PlayerType1(*gameManager, "Steph");
+    player1->addCard(*(deck->fetchCard()));
+    std::cout << player1->toString() << std::endl;
+    player1->addCard(*(deck->fetchCard()));
+    std::cout << player1->toString() << std::endl;
 
-    }
-
-    std::cout << "deck->getNumberOfCards()"  << std::endl;
-    std::cout << deck->getNumberOfCards() << std::endl;
     std::cout << "deck->toString()"  << std::endl;
     std::cout << deck->toString() << std::endl;
+    players.push_back(player1);
+
+    PlayerType1* player12 = new PlayerType1(*gameManager, "Steph1");
+    std::cout << player12->toString() << std::endl;
+    player12->addCard(*(deck->fetchCard()));
+    std::cout << player12->toString() << std::endl;
+    player12->addCard(*(deck->fetchCard()));
+    std::cout << player12->toString() << std::endl;
+    players.push_back(player12);
+
+    gameManager->setPlayers(players);
+    //getTotalOfPlayers
+    std::cout << gameManager->getTotalOfPlayers() << std::endl;
+
     return 0;
 }
