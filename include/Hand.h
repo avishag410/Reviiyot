@@ -21,7 +21,8 @@ public:
 	Hand();
     bool addCard(Card &card);
     bool removeCard(Card &card);
-	//TODO search for card
+	pair<bool,int> checkForNumericSerias();//returns true is there is serias & the repeated card , false otherwise
+	pair<bool,Figure> checkForFigureSerias();
     int getNumberOfCards(); // Get the number of cards in hand
     string toString(); // Return a list of the cards, separated by space, in one line, in a sorted order, ex: "2S 5D 10H"
 	virtual ~Hand()=0;

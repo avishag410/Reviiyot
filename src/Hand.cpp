@@ -2,7 +2,7 @@
 #include <map>
 #include <vector>
 #include <Hand.h>
-
+#include<algorithm>
 using namespace std;
 
 Hand::Hand():hashMap(), numOfCards(0){
@@ -56,6 +56,118 @@ vector<Card*> Hand::searchCardsByValue(string value){
     return vector<Card*>();
 }
 
+pair<bool,int> Hand::checkForNumericSerias()
+{
+	int numToCheck = 0,counter=0;
+	Card *card;
+	pair<bool,int> answer;
+	map<int,Card*>::iterator mapIt;
+	vector<int> numbersInHand;
+	vector<int>::iterator vectorIt=numbersInHand.begin();
+	
+	//insert to vector all number values in hand
+	for(mapIt=hashMap.begin();mapIt!=hashMap.end();mapIt++)
+	{
+		vectorIt = numbersInHand.begin();
+		card = mapIt->second;
+		//cout << card << " numeric card is "<< NUMERIC_CARD << endl;
+		if(card!=NULL)
+		{
+			if(card->cardType() == NUMERIC_CARD)
+			{
+				//cout << "inserting..." << endl;
+				numbersInHand.insert(vectorIt,((NumericCard*)card)->get_number());
+				//cout << "inserted." << endl;
+			}
+		}
+	}
+	//cout << "OK."<<endl;
+	sort(numbersInHand.begin(),numbersInHand.end());
+	//check for serias
+	vectorIt=numbersInHand.begin();
+	numToCheck=*vectorIt;
+	
+	for(vectorIt=numbersInHand.begin()+1;vectorIt!=numbersInHand.end();vectorIt++)
+	{
+			if(*vectorIt==numToCheck)
+			{	
+				counter++;
+			}
+			else
+			{
+				counter=0;
+				numToCheck=*vectorIt;
+			}
+			
+			if(counter==3)
+			{
+				answer.first=true;
+				answer.second=numToCheck;
+				return answer;
+			}
+	}
+	
+	answer.first=false;
+	answer.second=0;
+	return answer;
+}
+pair<bool,Figure> Hand::checkForFigureSerias()
+{
+	int counter=0;
+	pair<bool,Figure> answer;
+	Figure figureToCheck;
+	Card *card;
+	map<int,Card*>::iterator mapIt;
+	vector<Figure> figuresInHand;
+	vector<Figure>::iterator vectorIt=figuresInHand.begin();
+	
+	//insert to vector all number values in hand
+	for(mapIt=hashMap.begin();mapIt!=hashMap.end();mapIt++)
+	{
+		vectorIt = figuresInHand.begin();
+		card = mapIt->second;
+		//cout << card << " numeric card is "<< NUMERIC_CARD << endl;
+		if(card!=NULL)
+		{
+			if(card->cardType() == FIGURE_CARD)
+			{
+				//cout << "inserting..." << endl;
+				figuresInHand.insert(vectorIt,((FigureCard*)card)->get_figure());
+				//cout << "inserted." << endl;
+			}
+		}
+	}
+	//cout << "OK."<<endl;
+	sort(figuresInHand.begin(),figuresInHand.end());
+	//check for serias
+	vectorIt=figuresInHand.begin();
+	figureToCheck=*vectorIt;
+	
+	for(vectorIt=figuresInHand.begin()+1;vectorIt!=figuresInHand.end();vectorIt++)
+	{
+			if(*vectorIt==figureToCheck)
+			{	
+				counter++;
+			}
+			else
+			{
+				counter=0;
+				figureToCheck=*vectorIt;
+			}
+			
+			if(counter==3)
+			{
+				answer.first=true;
+				answer.second=figureToCheck;
+				return answer;
+			}
+				
+	}
+	answer.first=false;
+	answer.second=figureToCheck;//cant assign null type or 0
+	return answer;
+	
+}
 Hand::~Hand() {
 
 	string result = "";
