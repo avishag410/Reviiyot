@@ -16,15 +16,15 @@ Deck::Deck(string cards,int HighestNum):cards(){
 
         // insert the new cards at the beginning, so the fetch card is from the end
         while ((pos = cards.find(delimiter)) != std::string::npos) {
-            std::cout << "enter deck while" << std::endl;
             token = cards.substr(0, pos);
-            std::cout << token << std::endl;
-            Deck::insertCard(token,HighestNum);
+            if(token.size() > 0){
+                Deck::insertCard(token, HighestNum);
+            }
             cards.erase(0, pos + delimiter.length());
         }
-        Deck::insertCard(cards,HighestNum);
+        if(cards.size() > 0)
+            Deck::insertCard(cards, HighestNum);
     }
-
 }
 
 void Deck::insertCard(string cardStr,int HighestNum){
