@@ -8,6 +8,9 @@
 using namespace std;
 
 PlayerType1::PlayerType1(GameManager &gameManager, string name):Player::Player(gameManager,name){}
+
+PlayerType1::PlayerType1(const PlayerType1 &other):Player(other){}
+
 void PlayerType1::makeMove(){
     // search for the most-higher card
     Card* card = PlayerType1::searchStrategyCard();
@@ -25,6 +28,10 @@ void PlayerType1::makeMove(){
     }
 }
 
+Player* PlayerType1::clone(){
+    return new PlayerType1(*this);
+}
+
 Card* PlayerType1::searchStrategyCard(){
 
     return NULL ;
@@ -35,6 +42,7 @@ PlayerType1::~PlayerType1(){
 }
 
 PlayerType2::PlayerType2(GameManager &gameManager, string name):Player::Player(gameManager,name){}
+PlayerType2::PlayerType2(const PlayerType2 &other):Player(other){}
 void PlayerType2::makeMove(){
     // search for the least-lower card
     Card* card = PlayerType2::searchStrategyCard();
@@ -53,6 +61,10 @@ void PlayerType2::makeMove(){
     }
 }
 
+Player* PlayerType2::clone(){
+    return new PlayerType2(*this);
+}
+
 Card* PlayerType2::searchStrategyCard(){
     return NULL ;
 }
@@ -62,6 +74,7 @@ PlayerType2::~PlayerType2(){
 }
 
 PlayerType3::PlayerType3(GameManager &gameManager, string name, int _selfPosition):Player::Player(gameManager,name), playerIndex(0), selfPosition(_selfPosition){}
+PlayerType3::PlayerType3(const PlayerType3 &other):Player(other), playerIndex(other.playerIndex), selfPosition(other.selfPosition){}
 void PlayerType3::makeMove(){
     // counter - cyclic order
     int total = Player::gameManager->getTotalOfPlayers();
@@ -85,6 +98,10 @@ void PlayerType3::makeMove(){
     }
 }
 
+Player* PlayerType3::clone(){
+    return new PlayerType3(*this);
+}
+
 Card* PlayerType3::searchStrategyCard(){
     return NULL ;
 }
@@ -95,6 +112,7 @@ PlayerType3::~PlayerType3(){
 }
 
 PlayerType4::PlayerType4(GameManager &gameManager, string name, int _selfPosition):Player::Player(gameManager,name), playerIndex(0), selfPosition(_selfPosition){}
+PlayerType4::PlayerType4(const PlayerType4 &other):Player(other), playerIndex(other.playerIndex), selfPosition(other.selfPosition){}
 void PlayerType4::makeMove(){
     // counter - cyclic order
     int total = Player::gameManager->getTotalOfPlayers();
@@ -117,6 +135,10 @@ void PlayerType4::makeMove(){
     } else{
         Player::drawCard();
     }
+}
+
+Player* PlayerType4::clone(){
+    return new PlayerType4(*this);
 }
 
 Card* PlayerType4::searchStrategyCard(){

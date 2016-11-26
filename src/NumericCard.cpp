@@ -45,6 +45,9 @@ string NumericCard::toString(){
 	return valueString;
 }
 
+Card* NumericCard::clone(){
+    return new NumericCard(*this);
+}
 
 NumericCard::~NumericCard(void) {
 }

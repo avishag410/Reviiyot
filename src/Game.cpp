@@ -157,14 +157,12 @@ void Game::printNumberOfTurns(){
 
 void Game::copy(const Game& other){
     deck = other.deck;
-
     int i = 0;
     vector<Player*> temp = other.players;
     vector<Player*>::iterator it;
     for(it=temp.begin() ; it < temp.end(); it++, i++ ) {
-        players[i] = *it;
+        players[i] = (*it)->clone();
     }
-
     gameManager = other.gameManager;
 }
 

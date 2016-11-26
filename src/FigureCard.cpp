@@ -54,8 +54,11 @@ Cards::Figure FigureCard::get_figure() const
 {
 	return figure;
 }
-	
-	
+
+Card* FigureCard::clone(){
+    return new FigureCard(*this);
+}
+
 FigureCard::~FigureCard()
 {
 	
