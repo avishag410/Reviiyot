@@ -37,3 +37,40 @@ bool Utils::isNumericCard(string cardValue) {
 		return false;
 	}
 }
+
+
+int Utils::generateKey(string cardString,int HighestNum)
+{
+	if( HighestNum < 1 )
+	{	
+		throw invalid_argument("HighestNum should be bigger then 0");
+	}
+	string shapeStr,valueStr;
+	Cards::Shape shape;
+	int value,result;
+	
+	//parse the card represented string
+	shapeStr=cardString.back();
+	valueStr=cardString.substr(0,cardString.size()-1);
+	
+	
+	shape=Utils::parseShape(shapeStr);
+	
+	//parse value card
+	//figure card
+	if (valueStr.compare("J")==0)
+		value=(HighestNum+1+ static_cast<int>(Cards::Figure::Jack)*4);
+	else if (valueStr.compare("Q")==0)
+		value=(HighestNum+1+static_cast<int>(Cards::Figure::Queen)*4);
+	else if (valueStr.compare("K")==0)
+		value=(HighestNum+1+static_cast<int>(Cards::Figure::King)*4);
+	else if (valueStr.compare("A")==0)
+		value=(HighestNum+1+static_cast<int>(Cards::Figure::Ace)*4);
+	//numeric card
+	else
+		value=(stoi(valueStr)-2)*4;
+		
+		
+	result=value+shape;
+	return result;
+}

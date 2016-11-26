@@ -7,7 +7,8 @@
 using namespace Cards;
 using namespace std;
 
-Deck::Deck(string cards):cards(){
+
+Deck::Deck(string cards,int HighestNum):cards(){
     if(cards.size() > 0) {
         string delimiter = " ";
         size_t pos = 0;
@@ -17,16 +18,16 @@ Deck::Deck(string cards):cards(){
         while ((pos = cards.find(delimiter)) != std::string::npos) {
             token = cards.substr(0, pos);
             if(token.size() > 0){
-                Deck::insertCard(token);
+                Deck::insertCard(token, HighestNum);
             }
             cards.erase(0, pos + delimiter.length());
         }
         if(cards.size() > 0)
-            Deck::insertCard(cards);
+            Deck::insertCard(cards, HighestNum);
     }
 }
 
-void Deck::insertCard(string cardStr){
+void Deck::insertCard(string cardStr,int HighestNum){
     Card *card;
     // create new card with a smart pointer
     if(Utils::isNumericCard(cardStr)){
@@ -34,6 +35,8 @@ void Deck::insertCard(string cardStr){
     } else {
         card = new FigureCard(cardStr);
     }
+	int key=Utils::generateKey(cardStr,HighestNum);
+	card->set_key(key);
     Deck::cards.insert(Deck::cards.begin(), card);
 }
 

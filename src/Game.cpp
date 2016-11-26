@@ -5,7 +5,7 @@
 #include <fstream>
 using namespace std;
 
-Game::Game(char* configurationFile):players(), deck(""), maxNumber(0), printMode(0){
+Game::Game(char* configurationFile):players(), deck("", 0), maxNumber(0), printMode(0){
     Game::file_reader(configurationFile);
 }
 
@@ -84,7 +84,7 @@ void Game::createPLayer(istream& myfile, string line)
         }
 
         // create player by type
-        
+
     }
 
 }
@@ -97,8 +97,17 @@ void Game::play(){
 
 }
 
-void Game::printState(){
+void Game::printState()
+{
+/*
+	cout<<"Deck : "<<deck.toString();
 
+	vector<Player *>::iterator it;
+	for( it=players.begin() ; it!=players.end() ; it++)
+	{
+		it->toString();
+	}
+	*/
 }
 
 void Game::printWinner(){
