@@ -5,7 +5,9 @@
 #include <fstream>
 using namespace std;
 
-Game::Game(char* configurationFile):players(), deck(""){
+Game::Game(char* configurationFile):players(),deck("",0)
+{
+	
     Game::file_reader(configurationFile);
 }
 
@@ -85,8 +87,17 @@ void Game::play(){
 
 }
 
-void Game::printState(){
-
+void Game::printState()
+{
+/*
+	cout<<"Deck : "<<deck.toString();
+	
+	vector<Player *>::iterator it;
+	for( it=players.begin() ; it!=players.end() ; it++)
+	{
+		it->toString();
+	}
+	*/
 }
 
 void Game::printWinner(){
