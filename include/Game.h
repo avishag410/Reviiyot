@@ -20,13 +20,17 @@ private:
     void file_reader(string path);
     void createPLayer(istream& stream, string line);
     void distributeCards();
+    void copy(const Game& other);
 public:
     Game(char* configurationFile);
+    Game(const Game& other);
     void init();
     void play();
     void printState();        //Print the state of the game as described in the assignment.
     void printWinner();       //Print the winner of the game as describe in the assignment.
     void printNumberOfTurns(); //Print the number of played turns at any given time.
+    Game& operator=(const Game& other);
+    virtual ~Game();
 };
 
 #endif

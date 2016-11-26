@@ -76,7 +76,11 @@ Player* GameManager::getPlayerByPosition(int position){
         return NULL;
 }
 Card* GameManager::getCardFromDeck(){
-    return  deck->fetchCard();
+    cout<<"cardddddsssss "<< endl;
+    cout<< deck->toString() << endl;
+    Card* card = deck->fetchCard();
+    cout<<"carddddd "<<card->toString()<< endl;
+    return  card;
 }
 
 int GameManager::getTotalOfPlayers(){

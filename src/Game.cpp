@@ -4,11 +4,16 @@
 #include <Game.h>
 #include <GameManager.h>
 #include <fstream>
+#include "../include/Game.h"
+
 using namespace std;
 
 Game::Game(char* configurationFile)
-        :players(), deck("", 0), maxNumber(0), printMode(0), configurationPath(configurationFile), gameManager(deck){
-}
+        :players(), deck("", 0), maxNumber(0), printMode(0), configurationPath(configurationFile), gameManager(deck){}
+
+Game::Game(const Game& other)
+        :players(other.players), deck(other.deck), maxNumber(other.maxNumber), printMode(other.printMode),
+         configurationPath(other.configurationPath), gameManager(other.gameManager){}
 
 void Game::file_reader(string path) {
     string line;
@@ -41,10 +46,13 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             string deckCards = line;
-            deck = *(new Deck(deckCards, maxNumber));
+            Deck temp(deckCards, maxNumber);
+            deck = temp;
         }
+
         // Create game manager
-        gameManager = *(new GameManager(deck));
+        GameManager gameTemp(deck);
+        gameManager = gameTemp;
         // Create players
         createPLayer(myfile, line);
 
@@ -59,6 +67,7 @@ void Game::file_reader(string path) {
 }
 
 void Game::createPLayer(istream& myfile, string line) {
+
     int playerCounter = 0;
     while(myfile.good()){
         getline(myfile,line);
@@ -128,17 +137,13 @@ void Game::play(){
 
 }
 
-void Game::printState()
-{
-/*
-	cout<<"Deck : "<<deck.toString();
-
+// temporary print state
+void Game::printState() {
+	cout<<"Deck : "<< deck.toString() << endl;
 	vector<Player *>::iterator it;
-	for( it=players.begin() ; it!=players.end() ; it++)
-	{
-		it->toString();
+	for( it=players.begin() ; it!=players.end() ; it++) {
+        cout<< (*it)->toString() << endl;
 	}
-	*/
 }
 
 void Game::printWinner(){
@@ -147,4 +152,37 @@ void Game::printWinner(){
 
 void Game::printNumberOfTurns(){
 
+}
+
+
+void Game::copy(const Game& other){
+    deck = other.deck;
+
+    int i = 0;
+    vector<Player*> temp = other.players;
+    vector<Player*>::iterator it;
+    for(it=temp.begin() ; it < temp.end(); it++, i++ ) {
+        players[i] = *it;
+    }
+
+    gameManager = other.gameManager;
+}
+
+Game& Game::operator=(const Game& other){
+    if(this != &other){
+        vector<Player*>::iterator it;
+        for(it=players.begin() ; it < players.end(); it++) {
+            delete *it;
+        }
+
+        Game::copy(other);
+    }
+    return *this;
+}
+
+Game::~Game(){
+    vector<Player*>::iterator it;
+    for(it=players.begin() ; it < players.end(); it++) {
+        delete *it;
+    }
 }
