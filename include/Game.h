@@ -19,6 +19,7 @@ private:
     GameManager gameManager;
     void file_reader(string path);
     void createPLayer(istream& stream, string line);
+	void shuffleCards();
 public:
     Game(char* configurationFile);
     void init();
