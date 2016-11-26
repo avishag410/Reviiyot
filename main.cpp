@@ -6,7 +6,9 @@
 #include <Game.h>
 
 
-int main() {
+int main(int argc,char **argv) 
+{
+	/*
     std::cout << "Hello, World!" << std::endl;
     int N=3;//depents on input file,for this example is 3
 	KeyGenerator *k=new KeyGenerator(N);
@@ -50,6 +52,10 @@ int main() {
     std::cout << gameManager->getPlayerWithMaxCards(*player12)->toString() << std::endl;
     std::cout << gameManager->getPlayerWithMinCards(*player1)->toString() << std::endl;
     std::cout << gameManager->getCardFromDeck()->toString() << std::endl;
-
+	*/
+	
+	char* configurationFile = argv[1];
+    Game game = Game(configurationFile);
+	
 	return 0;
 }
