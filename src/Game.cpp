@@ -5,7 +5,7 @@
 #include <fstream>
 using namespace std;
 
-Game::Game(char* configurationFile):players(), deck(""){
+Game::Game(char* configurationFile):players(), deck(""), maxNumber(0), printMode(0){
     Game::file_reader(configurationFile);
 }
 
@@ -22,8 +22,8 @@ void Game::file_reader(string path)
             while (myfile.good() && (line.size() == 0 || line.find("#") == 0)) {
                 getline (myfile,line);
             }
-            int mode = stoi(line);
-            cout << mode << endl;
+            printMode = stoi(line);
+            cout << printMode << endl;
         }
 
         // Read max number
@@ -32,7 +32,7 @@ void Game::file_reader(string path)
             while (myfile.good() && (line.size() == 0 || line.find("#") == 0)) {
                 getline (myfile,line);
             }
-            int maxNumber = stoi(line);
+            maxNumber = stoi(line);
             cout << maxNumber << endl;
         }
 
@@ -44,37 +44,49 @@ void Game::file_reader(string path)
             }
             string deckCards = line;
             cout << deckCards << endl;
-            //deck = *(new Deck(deckCards));
+            deck = *(new Deck(deckCards));
+            cout << deck.toString() << endl;
         }
 
         // Create players
-        while(myfile.good()){
-            getline(myfile,line);
-            while (myfile.good() && (line.size() == 0 || line.find("#") == 0)) {
-                getline (myfile,line);
-            }
-            string player = line;
-            cout << player << endl;
-            //deck = *(new Deck(deckCards));
-        }
-
+        createPLayer(myfile, line);
         myfile.close();
-    }
-    else
-    {
+    } else {
         cout << "Unable to open file";
     }
 }
 
-void Game::stream_reader(istream& stream, string line)
+void Game::createPLayer(istream& myfile, string line)
 {
-    getline (stream,line);
-    if (line.size() == 0 || line.find("#") == 0) {
-        //getline (stream,line);
-        cout << "empty44  " << endl;
-    } else{
-        cout << line << endl;
+    while(myfile.good()){
+        getline(myfile,line);
+        while (myfile.good() && (line.size() == 0 || line.find("#") == 0)) {
+            getline (myfile,line);
+        }
+        string player = line;
+        cout << player << endl;
+
+        string delimiter = " ";
+        size_t pos = 0;
+        string name = "";
+
+        while ((pos = player.find(delimiter)) != std::string::npos && name.size() > 0) {
+            name = player.substr(0, pos);
+            player.erase(0, pos + delimiter.length());
+        }
+
+        int playerType = 0;
+
+        while ((pos = player.find(delimiter)) != std::string::npos && playerType == 0) {
+            string type = player.substr(0, pos);
+            playerType = stoi(type);
+            player.erase(0, pos + delimiter.length());
+        }
+
+        // create player by type
+        
     }
+
 }
 
 void Game::init(){
