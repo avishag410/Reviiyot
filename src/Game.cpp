@@ -23,7 +23,6 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             printMode = stoi(line);
-            cout << printMode << endl;
         }
 
         // Read max number
@@ -33,7 +32,6 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             maxNumber = stoi(line);
-            cout << maxNumber << endl;
         }
 
         // Read deck cards
@@ -43,9 +41,7 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             string deckCards = line;
-            cout << deckCards << endl;
             deck = *(new Deck(deckCards, maxNumber));
-            cout << deck.toString() << endl;
         }
         // Create game manager
         gameManager = *(new GameManager(deck));
@@ -70,8 +66,6 @@ void Game::createPLayer(istream& myfile, string line) {
             getline (myfile,line);
         }
         string player = line;
-        cout << player << endl;
-
         string delimiter = " ";
         size_t pos = 0;
         string name = "";
@@ -92,7 +86,6 @@ void Game::createPLayer(istream& myfile, string line) {
         if(player.size() > 0)
             playerType = stoi(player);
 
-        cout <<"player type" << playerType << endl;
         // create player by type
         switch (playerType) {
             case 1:
@@ -117,12 +110,10 @@ void Game::createPLayer(istream& myfile, string line) {
 void Game::distributeCards(){
     vector<Player*>::iterator it;
     for( it=players.begin() ; it!=players.end() ; it++) {
-        cout << (*it)->toString() << endl;
         int cardsCounter = 0;
         while(cardsCounter < 7){
             Card* card = deck.fetchCard();
             (*it)->addCard(*card);
-            cout << (*it)->toString() << endl;
             cardsCounter++;
         }
     }
@@ -130,15 +121,7 @@ void Game::distributeCards(){
 
 void Game::init(){
     Game::file_reader(configurationPath);
-    cout << deck.toString() << endl;
-    cout <<"players" << players.size() << endl;
     Game::distributeCards();
-    cout << deck.toString() << endl;
-
-    vector<Player*>::iterator it;
-    for( it=players.begin() ; it!=players.end() ; it++) {
-        cout << (*it)->toString() << endl;
-    }
 }
 
 void Game::play(){
