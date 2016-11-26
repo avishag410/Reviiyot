@@ -111,9 +111,22 @@ void Game::createPLayer(istream& myfile, string line) {
     }
 
 }
-
+void Game::shuffleCards()
+{
+	
+	vector<Player*>::iterator it;
+	
+	for(it=players.begin();it!=players.end();it++)
+	{
+		for(int i=0;i<7;i++)
+		{
+			(*it)->addCard(*(deck.fetchCard()));
+		}
+	}
+}
 void Game::init(){
     Game::file_reader(configurationPath);
+	Game::shuffleCards();
 }
 
 void Game::play(){
