@@ -39,6 +39,7 @@ public:
 	void set_key(int key);
 	void set_shape(Cards::Shape nShape);
 	Cards::Shape get_shape() const;
+	Card& operator=(const Card& other);
 };
 
 class FigureCard : public Card {
@@ -53,7 +54,6 @@ public:
 	void set_figure(Cards::Figure f);
 	Cards::Figure get_figure() const;
 	virtual ~FigureCard() override;
-
 };
 
 class NumericCard : public Card {

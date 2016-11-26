@@ -27,6 +27,10 @@ Deck::Deck(string cards,int HighestNum):cards(){
     }
 }
 
+Deck::Deck(const Deck& other):cards(){
+    Deck::copy(other);
+}
+
 void Deck::insertCard(string cardStr,int HighestNum){
     Card *card;
     // create new card with a smart pointer
@@ -63,6 +67,33 @@ string Deck::toString(){
     }
 
     return result;
+}
+
+void Deck::copy(const Deck& other){
+    vector<Card*> temp = other.cards;
+    vector<Card*>::iterator it;
+    for(it=temp.begin(); it < temp.end(); it++ ) {
+        Card* card;
+
+        if(Utils::isNumericCard((*it)->toString())){
+            card = new NumericCard(*(NumericCard*)*it);
+        } else {
+            card = new FigureCard(*(FigureCard*)*it);
+        }
+        cards.push_back(card);
+    }
+}
+
+Deck& Deck::operator=(const Deck& other){
+    if(this != &other){
+        vector<Card*>::iterator it;
+        for(it=cards.begin() ; it < cards.end(); it++) {
+            delete *it;
+        }
+
+        Deck::copy(other);
+    }
+    return *this;
 }
 
 Deck::~Deck(){

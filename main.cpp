@@ -56,5 +56,6 @@ int main(int argc,char **argv)
 	char* configurationFile = argv[1];
     Game game =Game(configurationFile);
     game.init();
+    game.printState();
 	return 0;
 }

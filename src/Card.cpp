@@ -36,8 +36,16 @@ Cards::Shape Card::get_shape() const
 	return shape;
 }
 
-Card::~Card()
-{
+Card& Card::operator=(const Card& other){
+	if(this != &other){
+		key = other.key;
+		valueString = other.valueString;
+		shape = other.shape;
+	}
+	return *this;
+}
+
+Card::~Card() {
 
 }
 

@@ -4,11 +4,16 @@
 #include <Game.h>
 #include <GameManager.h>
 #include <fstream>
+#include "../include/Game.h"
+
 using namespace std;
 
 Game::Game(char* configurationFile)
-        :players(), deck("", 0), maxNumber(0), printMode(0), configurationPath(configurationFile), gameManager(deck){
-}
+        :players(), deck("", 0), maxNumber(0), printMode(0), configurationPath(configurationFile), gameManager(deck){}
+
+Game::Game(const Game& other)
+        :players(other.players), deck(other.deck), maxNumber(other.maxNumber), printMode(other.printMode),
+         configurationPath(other.configurationPath), gameManager(other.gameManager){}
 
 void Game::file_reader(string path) {
     string line;
@@ -23,7 +28,6 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             printMode = stoi(line);
-            cout << printMode << endl;
         }
 
         // Read max number
@@ -33,7 +37,6 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             maxNumber = stoi(line);
-            cout << maxNumber << endl;
         }
 
         // Read deck cards
@@ -43,12 +46,13 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             string deckCards = line;
-            cout << deckCards << endl;
-            deck = *(new Deck(deckCards, maxNumber));
-            cout << deck.toString() << endl;
+            Deck temp(deckCards, maxNumber);
+            deck = temp;
         }
+
         // Create game manager
-        gameManager = *(new GameManager(deck));
+        GameManager gameTemp(deck);
+        gameManager = gameTemp;
         // Create players
         createPLayer(myfile, line);
 
@@ -63,6 +67,7 @@ void Game::file_reader(string path) {
 }
 
 void Game::createPLayer(istream& myfile, string line) {
+
     int playerCounter = 0;
     while(myfile.good()){
         getline(myfile,line);
@@ -70,8 +75,6 @@ void Game::createPLayer(istream& myfile, string line) {
             getline (myfile,line);
         }
         string player = line;
-        cout << player << endl;
-
         string delimiter = " ";
         size_t pos = 0;
         string name = "";
@@ -83,67 +86,64 @@ void Game::createPLayer(istream& myfile, string line) {
 
         int playerType = 0;
 
-        while ((pos = player.find(delimiter)) != std::string::npos && playerType == 0) {
-            string type = player.substr(0, pos);
-            playerType = stoi(type);
+        // clear blank spaces
+        while ((pos = player.find(delimiter)) != std::string::npos) {
             player.erase(0, pos + delimiter.length());
         }
 
-        Player* newPlayer;
+        // get player type
+        if(player.size() > 0)
+            playerType = stoi(player);
+
         // create player by type
         switch (playerType) {
             case 1:
-                newPlayer = new PlayerType1(gameManager, name);
+                players.push_back(new PlayerType1(gameManager, name));
                 break;
             case 2:
-                newPlayer = new PlayerType2(gameManager, name);
+                players.push_back(new PlayerType2(gameManager, name));
                 break;
             case 3:
-                newPlayer = new PlayerType3(gameManager, name, playerCounter);
+                players.push_back(new PlayerType3(gameManager, name, playerCounter));
                 break;
             case 4:
-                newPlayer = new PlayerType4(gameManager, name, playerCounter);
+                players.push_back(new PlayerType4(gameManager, name, playerCounter));
                 break;
         }
 
-        players.push_back(newPlayer);
         playerCounter++;
     }
 
 }
-void Game::shuffleCards()
-{
-	
-	vector<Player*>::iterator it;
-	
-	for(it=players.begin();it!=players.end();it++)
-	{
-		for(int i=0;i<7;i++)
-		{
-			(*it)->addCard(*(deck.fetchCard()));
-		}
-	}
+
+void Game::distributeCards(){
+    vector<Player*>::iterator it;
+    for( it=players.begin() ; it!=players.end() ; it++) {
+        int cardsCounter = 0;
+        while(cardsCounter < 7){
+            Card* card = deck.fetchCard();
+            (*it)->addCard(*card);
+            cardsCounter++;
+        }
+    }
 }
+
 void Game::init(){
     Game::file_reader(configurationPath);
-	Game::shuffleCards();
+    Game::distributeCards();
 }
 
 void Game::play(){
 
 }
 
-void Game::printState()
-{
-
-	cout<<"Deck : "<<deck.toString()<<endl;
-
+// temporary print state
+void Game::printState() {
+	cout<<"Deck : "<< deck.toString() << endl;
 	vector<Player *>::iterator it;
-	for( it=players.begin() ; it!=players.end() ; it++)
-	{
-		cout<<(*it)->toString()<<endl;
+	for( it=players.begin() ; it!=players.end() ; it++) {
+        cout<< (*it)->toString() << endl;
 	}
-	
 }
 
 void Game::printWinner(){
@@ -152,4 +152,37 @@ void Game::printWinner(){
 
 void Game::printNumberOfTurns(){
 
+}
+
+
+void Game::copy(const Game& other){
+    deck = other.deck;
+
+    int i = 0;
+    vector<Player*> temp = other.players;
+    vector<Player*>::iterator it;
+    for(it=temp.begin() ; it < temp.end(); it++, i++ ) {
+        players[i] = *it;
+    }
+
+    gameManager = other.gameManager;
+}
+
+Game& Game::operator=(const Game& other){
+    if(this != &other){
+        vector<Player*>::iterator it;
+        for(it=players.begin() ; it < players.end(); it++) {
+            delete *it;
+        }
+
+        Game::copy(other);
+    }
+    return *this;
+}
+
+Game::~Game(){
+    vector<Player*>::iterator it;
+    for(it=players.begin() ; it < players.end(); it++) {
+        delete *it;
+    }
 }
