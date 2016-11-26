@@ -8,23 +8,7 @@ using namespace Cards;
 using namespace std;
 
 
-Deck::Deck(string cards,KeyGenerator &k)
-{
-    string delimiter = " ";
-    size_t pos = 0;
-    string token;
-
-
-    // insert the new cards at the beginning, so the fetch card is from the end
-    while ((pos = cards.find(delimiter)) != std::string::npos) {
-        token = cards.substr(0, pos);
-        Deck::insertCard(token,k);
-        cards.erase(0, pos + delimiter.length());
-    }
-	
-    Deck::insertCard(cards,k);
-
-Deck::Deck(string cards):cards(){
+Deck::Deck(string cards,KeyGenerator &k):cards(){
     if(cards.size() > 0) {
         string delimiter = " ";
         size_t pos = 0;
@@ -35,17 +19,16 @@ Deck::Deck(string cards):cards(){
             std::cout << "enter deck while" << std::endl;
             token = cards.substr(0, pos);
             std::cout << token << std::endl;
-            Deck::insertCard(token);
+            Deck::insertCard(token,k);
             cards.erase(0, pos + delimiter.length());
         }
-        Deck::insertCard(cards);
+        Deck::insertCard(cards,k);
     }
 
 }
 
 void Deck::insertCard(string cardStr,KeyGenerator &k){
     Card *card;
-	
     // create new card with a smart pointer
     if(Utils::isNumericCard(cardStr)){
         card = new NumericCard(cardStr);
@@ -83,8 +66,8 @@ string Deck::toString(){
 }
 
 Deck::~Deck(){
-   for(int i = 0; i < Deck::cards.size(); i++){
-       Card* card = Deck::cards[i];
-       delete card;
-   }
+    vector<Card*>::iterator it;
+    for(it=cards.begin(); it < cards.end(); it++ ) {
+        delete *it;
+    }
 }

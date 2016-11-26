@@ -12,7 +12,7 @@ Card::Card(const Card &rhs):shape(rhs.shape), key(rhs.key), valueString(rhs.valu
 int Card::get_key() const
 {
 	//TODO:exceptions?
-	return key; // Card::key;
+	return 10; // Card::key;
 }
 
 void Card::set_key(int key)
