@@ -5,6 +5,7 @@
 #include <fstream>
 #include "Player.h"
 #include "Deck.h"
+#include "GameManager.h"
 
 using namespace std;
 
@@ -14,6 +15,8 @@ private:
     Deck deck;                 //The deck of the game
     int maxNumber;
     int printMode;
+    string configurationPath;
+    GameManager gameManager;
     void file_reader(string path);
     void createPLayer(istream& stream, string line);
 public:
