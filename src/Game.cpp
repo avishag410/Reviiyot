@@ -122,15 +122,15 @@ void Game::play(){
 
 void Game::printState()
 {
-/*
-	cout<<"Deck : "<<deck.toString();
+
+	cout<<"Deck : "<<deck.toString()<<endl;
 
 	vector<Player *>::iterator it;
 	for( it=players.begin() ; it!=players.end() ; it++)
 	{
-		it->toString();
+		cout<<(*it)->toString()<<endl;
 	}
-	*/
+	
 }
 
 void Game::printWinner(){
