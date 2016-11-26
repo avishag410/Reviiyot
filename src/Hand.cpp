@@ -46,7 +46,8 @@ string Hand::toString()
 	
 	for(printIt=hashMap.begin() ; printIt!=hashMap.end() ; printIt++)
 	{
-		result += (printIt->second)->toString();
+		result.append( (printIt->second)->toString());
+		result.append(" ");
 	}
 	return result;
 }

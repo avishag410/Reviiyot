@@ -7,7 +7,8 @@
 using namespace Cards;
 using namespace std;
 
-Deck::Deck(string cards):cards(){
+
+Deck::Deck(string cards,KeyGenerator &k):cards(){
     if(cards.size() > 0) {
         string delimiter = " ";
         size_t pos = 0;
@@ -18,14 +19,15 @@ Deck::Deck(string cards):cards(){
             std::cout << "enter deck while" << std::endl;
             token = cards.substr(0, pos);
             std::cout << token << std::endl;
-            Deck::insertCard(token);
+            Deck::insertCard(token,k);
             cards.erase(0, pos + delimiter.length());
         }
-        Deck::insertCard(cards);
+        Deck::insertCard(cards,k);
     }
+
 }
 
-void Deck::insertCard(string cardStr){
+void Deck::insertCard(string cardStr,KeyGenerator &k){
     Card *card;
     // create new card with a smart pointer
     if(Utils::isNumericCard(cardStr)){
@@ -33,6 +35,8 @@ void Deck::insertCard(string cardStr){
     } else {
         card = new FigureCard(cardStr);
     }
+	int key=k.generate(cardStr);
+	card->set_key(key);
     Deck::cards.insert(Deck::cards.begin(), card);
 }
 
