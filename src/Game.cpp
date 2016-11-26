@@ -44,7 +44,7 @@ void Game::file_reader(string path)
             }
             string deckCards = line;
             cout << deckCards << endl;
-            deck = *(new Deck(deckCards));
+            deck = *(new Deck(deckCards, maxNumber));
             cout << deck.toString() << endl;
         }
 
