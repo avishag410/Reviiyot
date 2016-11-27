@@ -50,22 +50,21 @@ int Utils::generateKey(string cardString,int HighestNum)
 	int value,result;
 	
 	//parse the card represented string
-	shapeStr=cardString.back();
-	valueStr=cardString.substr(0,cardString.size()-1);
-	
+	shapeStr=cardString[1];
+	valueStr=cardString[0];
 	
 	shape=Utils::parseShape(shapeStr);
-	
+	cout << "Debug: [Utils::generate] \"shape\" is " << shapeStr << " ; enum says: " << shape << endl;
 	//parse value card
 	//figure card
 	if (valueStr.compare("J")==0)
-		value=(HighestNum+1+ static_cast<int>(Cards::Figure::Jack)*4);
+		value=(((HighestNum-1)*4)+ static_cast<int>(Cards::Figure::Jack)*4);
 	else if (valueStr.compare("Q")==0)
-		value=(HighestNum+1+static_cast<int>(Cards::Figure::Queen)*4);
+		value=(((HighestNum-1)*4)+static_cast<int>(Cards::Figure::Queen)*4);
 	else if (valueStr.compare("K")==0)
-		value=(HighestNum+1+static_cast<int>(Cards::Figure::King)*4);
+		value=(((HighestNum-1)*4)+static_cast<int>(Cards::Figure::King)*4);
 	else if (valueStr.compare("A")==0)
-		value=(HighestNum+1+static_cast<int>(Cards::Figure::Ace)*4);
+		value=(((HighestNum-1)*4)+static_cast<int>(Cards::Figure::Ace)*4);
 	//numeric card
 	else
 		value=(stoi(valueStr)-2)*4;
