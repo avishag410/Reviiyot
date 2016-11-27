@@ -59,6 +59,12 @@ Card* FigureCard::clone(){
     return new FigureCard(*this);
 }
 
+
+int FigureCard::cardType()
+{
+	return FIGURE_CARD;
+}
+
 FigureCard::~FigureCard()
 {
 	

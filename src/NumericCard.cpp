@@ -49,6 +49,11 @@ Card* NumericCard::clone(){
     return new NumericCard(*this);
 }
 
+int NumericCard::cardType()
+{
+	return NUMERIC_CARD;
+}
+
 NumericCard::~NumericCard(void) {
 }
 

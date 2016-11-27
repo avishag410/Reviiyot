@@ -2,6 +2,9 @@
 #define CARD_H_
 
 #include <iostream>
+#define NUMERIC_CARD 1
+#define FIGURE_CARD 2
+
 using namespace std;
 
 namespace Cards {
@@ -38,6 +41,7 @@ public:
 	int compare(Card &otherCard); 	//returns 0 if equals returns 1 if this>otherCard returns -1 if this<otherCard
 	int get_key() const;
 	void set_key(int key);
+	virtual int cardType(void) = 0;
 	void set_shape(Cards::Shape nShape);
 	Cards::Shape get_shape() const;
 	Card& operator=(const Card& other);
@@ -51,6 +55,7 @@ public:
 	FigureCard(string cardStr);
 	FigureCard(const FigureCard &rhs);//copy ctor
 	FigureCard& operator=(const FigureCard& rhs);
+	virtual int cardType(void) override;
 	virtual string toString() override;
 	void set_figure(Cards::Figure f);
 	Cards::Figure get_figure() const;
@@ -66,7 +71,8 @@ public:
 	NumericCard(string cardStr);
 	NumericCard(const NumericCard &rhs);
 	NumericCard& operator=(const NumericCard& rhs);
-
+	
+	virtual int cardType(void) override;
 	virtual string toString() override;
 	void set_number(int n);
 	int get_number() const;
