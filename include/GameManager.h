@@ -15,6 +15,7 @@ private:
     Deck* deck;
     void copy(const GameManager& other);
 public:
+    GameManager();
     GameManager(Deck& deck);
     GameManager(const GameManager& other);
     void setPlayers(vector<Player*> _players);
@@ -26,6 +27,7 @@ public:
     Card* getCardFromDeck();
     int getTotalOfPlayers();
     GameManager& operator=(const GameManager& other);
+    ~GameManager();
 };
 
 #endif

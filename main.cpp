@@ -13,6 +13,6 @@ int main(int argc,char **argv)
     game.init();
     game.printState();
     Game initializedGame = game;
-    //initializedGame.printState();
+    initializedGame.printState();
 	return 0;
 }
