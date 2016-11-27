@@ -9,8 +9,7 @@
 using namespace std;
 
 Game::Game(char* configurationFile)
-        :players(), deck("", 0), maxNumber(0), printMode(0), configurationPath(configurationFile), gameManager(deck){
-}
+        :players(), deck("", 0), maxNumber(0), printMode(0), configurationPath(configurationFile), gameManager(deck){}
 
 Game::Game(const Game& other):deck("", 0) {
     Game::copy(other);

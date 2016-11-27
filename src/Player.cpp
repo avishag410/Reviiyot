@@ -10,7 +10,7 @@ using namespace std;
 
 Player::Player(GameManager &_gameManager, string _name): name(_name), gameManager(&_gameManager){}
 
-Player::Player(const Player& other): name(other.name), gameManager(other.gameManager){}
+Player::Player(const Player& other):Hand(other), name(other.name), gameManager(other.gameManager){}
 
 
 string Player::getName(){

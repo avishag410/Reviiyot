@@ -8,6 +8,10 @@ using namespace std;
 Hand::Hand():hashMap(), numOfCards(0){
 }
 
+Hand::Hand(const Hand& other){
+	Hand::copy(other);
+}
+
 bool Hand::addCard(Card &card) {
 	pair<map<int,Card*>::iterator,bool> ret;
 	
@@ -168,15 +172,36 @@ pair<bool,Figure> Hand::checkForFigureSerias()
 	return answer;
 	
 }
+
+void Hand::copy(const Hand& other){
+	numOfCards = other.numOfCards;
+	cout<<"copy hand card"<< endl;
+	map<int,Card*> temp = other.hashMap;
+	map<int,Card*>::iterator it;
+
+	for(it=temp.begin() ; it!=temp.end() ; it++) {
+		cout<<"copy hand card"<< endl;
+		hashMap.insert(pair<int,Card*>((*it).first,(*it).second->clone()));
+	}
+}
+
+Hand& Hand::operator=(const Hand& other){
+	if(this != &other){
+		// delete
+		map<int,Card*>::iterator it;
+		for(it=hashMap.begin() ; it!=hashMap.end() ; it++) {
+			delete (*it).second;
+		}
+		// copy
+		Hand::copy(other);
+	}
+	return *this;
+}
+
 Hand::~Hand() {
-
-	string result = "";
-	map<int,Card*>::iterator printIt;
-
-	for(printIt=hashMap.begin() ; printIt!=hashMap.end() ; printIt++)
-	{
-		delete (*printIt).second;
-
+	map<int,Card*>::iterator it;
+	for(it=hashMap.begin() ; it!=hashMap.end() ; it++) {
+		delete (*it).second;
 	}
 }
 	
