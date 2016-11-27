@@ -138,7 +138,8 @@ void Game::play(){
 //print only if printMode is on == 1
 
     // check if there is a winner
-    while(gameManager.thereIsAWinner() == -1){
+    //while(!gameManager.thereIsAWinner()){
+    while(false){
         // count the turns
         ++turnsCounter;
         // print state
@@ -162,11 +163,16 @@ void Game::printState() {
 }
 
 void Game::printWinner(){
-
+    vector<Player*> winners = gameManager.getWinners();
+    if(winners.size() == 2){
+        cout<<"***** The winner are: "<< winners.at(0)->getName()<< " and " << winners.at(1)->getName() <<" *****" << endl;
+    } else if (winners.size() == 1){
+        cout<<"***** The Winner is: "<< winners.at(0)->getName()<<" *****" << endl;
+    }
 }
 
 void Game::printNumberOfTurns(){
-
+    cout<<"Number of turns: "<< turnsCounter << endl;
 }
 
 

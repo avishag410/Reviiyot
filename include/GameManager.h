@@ -26,7 +26,8 @@ public:
     Player* getPlayerByPosition(int position);
     Card* getCardFromDeck();
     int getTotalOfPlayers();
-    int thereIsAWinner();
+    bool thereIsAWinner();
+    vector<Player*> getWinners();
     GameManager& operator=(const GameManager& other);
     ~GameManager();
 };

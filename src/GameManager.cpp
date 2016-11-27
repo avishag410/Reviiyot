@@ -93,14 +93,24 @@ int GameManager::getTotalOfPlayers(){
     return players.size();
 }
 
-int GameManager::thereIsAWinner(){
-    int result, index = -1;
+bool GameManager::thereIsAWinner(){
+    bool result = false;
     vector<Player*>::iterator it1;
     for(it1=players.begin(); it1 < players.end(); it1++ ) {
         if((*it1)->getNumberOfCards() == 0) {
-            result = index;
+            result = true;
         }
-        ++index;
+    }
+    return result;
+}
+
+vector<Player*> GameManager::getWinners(){
+    vector<Player*> result;
+    vector<Player*>::iterator it1;
+    for(it1=players.begin(); it1 < players.end(); it1++ ) {
+        if((*it1)->getNumberOfCards() == 0) {
+            result.push_back(*it1);
+        }
     }
     return result;
 }
