@@ -175,12 +175,10 @@ pair<bool,Figure> Hand::checkForFigureSerias()
 
 void Hand::copy(const Hand& other){
 	numOfCards = other.numOfCards;
-	cout<<"copy hand card"<< endl;
 	map<int,Card*> temp = other.hashMap;
 	map<int,Card*>::iterator it;
 
 	for(it=temp.begin() ; it!=temp.end() ; it++) {
-		cout<<"copy hand card"<< endl;
 		hashMap.insert(pair<int,Card*>((*it).first,(*it).second->clone()));
 	}
 }
