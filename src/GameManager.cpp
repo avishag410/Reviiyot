@@ -93,6 +93,18 @@ int GameManager::getTotalOfPlayers(){
     return players.size();
 }
 
+int GameManager::thereIsAWinner(){
+    int result, index = -1;
+    vector<Player*>::iterator it1;
+    for(it1=players.begin(); it1 < players.end(); it1++ ) {
+        if((*it1)->getNumberOfCards() == 0) {
+            result = index;
+        }
+        ++index;
+    }
+    return result;
+}
+
 
 GameManager &GameManager::operator=(const GameManager& other){
     if(this != &other){

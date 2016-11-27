@@ -15,6 +15,7 @@ private:
     Deck deck;                 //The deck of the game
     int maxNumber;
     int printMode;
+    int turnsCounter;
     string configurationPath;
     GameManager gameManager;
     void file_reader(string path);

@@ -9,10 +9,10 @@
 using namespace std;
 
 Game::Game(char* configurationFile)
-        :players(), deck("", 0), maxNumber(0), printMode(0), configurationPath(configurationFile), gameManager(deck){}
+        :players(), deck("", 0), maxNumber(0), printMode(0), turnsCounter(0), configurationPath(configurationFile), gameManager(deck){}
 
-Game::Game(const Game& other):players(), deck("", 0), maxNumber(other.maxNumber), printMode(other.printMode),
-                              configurationPath(other.configurationPath), gameManager(){
+Game::Game(const Game& other):players(), deck("", 0), maxNumber(other.maxNumber), printMode(other.printMode), turnsCounter(other.printMode),
+                              configurationPath(other.configurationPath), gameManager() {
     Game::copy(other);
 }
 
@@ -135,7 +135,21 @@ void Game::init(){
 }
 
 void Game::play(){
+//print only if printMode is on == 1
 
+    // check if there is a winner
+    while(gameManager.thereIsAWinner() == -1){
+        // count the turns
+        ++turnsCounter;
+        // print state
+        if(printMode==1){
+            cout<<"Turn "<< turnsCounter << endl;
+            Game::printState();
+        }
+        // print next move
+        int nextPlayer = (turnsCounter-1)%players.size();
+        players.at(nextPlayer)->makeMove(printMode==1);
+    }
 }
 
 // temporary print state
