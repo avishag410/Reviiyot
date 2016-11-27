@@ -8,7 +8,7 @@ using namespace std;
 Hand::Hand():hashMap(), numOfCards(0){
 }
 
-Hand::Hand(const Hand& other){
+Hand::Hand(const Hand& other):hashMap(), numOfCards(0){
 	Hand::copy(other);
 }
 
