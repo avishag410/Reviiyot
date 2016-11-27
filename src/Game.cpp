@@ -19,7 +19,7 @@ Game::Game(const Game& other):players(), deck("", 0), maxNumber(other.maxNumber)
 void Game::file_reader(string path) {
     string line;
     ifstream myfile(path);
-
+	//cout << "[DEBUG] Game::file_reader :" << endl;
     if (myfile.is_open())
     {
         // Read mode
@@ -29,6 +29,7 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             printMode = stoi(line);
+			//cout << "Debug: printMode = " << printMode << endl;
         }
 
         // Read max number
@@ -38,6 +39,7 @@ void Game::file_reader(string path) {
                 getline (myfile,line);
             }
             maxNumber = stoi(line);
+			//cout << "Debug: maxNumber = " << maxNumber << endl;
         }
 
         // Read deck cards
@@ -46,16 +48,18 @@ void Game::file_reader(string path) {
             while (myfile.good() && (line.size() == 0 || line.find("#") == 0)) {
                 getline (myfile,line);
             }
+			
             string deckCards = line;
             Deck temp(deckCards, maxNumber);
             deck = temp;
+			//cout << "Debug: deckCards = " << deckCards << endl;
         }
-
+		
         // Create game manager
         GameManager gameTemp(deck);
         gameManager = gameTemp;
         // Create players
-        createPLayer(myfile, line);
+        createPlayer(myfile, line);
 
         // close file
         myfile.close();
@@ -63,11 +67,11 @@ void Game::file_reader(string path) {
         // set all the players
         gameManager.setPlayers(players);
     } else {
-        cout << "Unable to open file";
+        cout << "Unable to open file" << endl;
     }
 }
 
-void Game::createPLayer(istream& myfile, string line) {
+void Game::createPlayer(istream& myfile, string line) {
 
     int playerCounter = 0;
     while(myfile.good()){
@@ -75,11 +79,12 @@ void Game::createPLayer(istream& myfile, string line) {
         while (myfile.good() && (line.size() == 0 || line.find("#") == 0)) {
             getline (myfile,line);
         }
+		if(line.size() == 0) break;
         string player = line;
         string delimiter = " ";
         size_t pos = 0;
         string name = "";
-
+		//cout << "Debug: player = " << player << endl;
         while ((pos = player.find(delimiter)) != std::string::npos && name.size() == 0) {
             name = player.substr(0, pos);
             player.erase(0, pos + delimiter.length());
@@ -110,6 +115,9 @@ void Game::createPLayer(istream& myfile, string line) {
             case 4:
                 players.push_back(new PlayerType4(gameManager, name, playerCounter));
                 break;
+			default:
+				cout << "bugbugbug" << endl;
+				break;
         }
 
         playerCounter++;

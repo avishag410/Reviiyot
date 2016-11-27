@@ -1,8 +1,9 @@
 #ifndef Utils_H
 #define Utils_H
 
-#include<iostream>
-#include<Card.h>
+#include <iostream>
+#include <string.h>
+#include "Card.h"
 using namespace std;
 //using namespace Cards;
 

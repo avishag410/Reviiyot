@@ -19,7 +19,7 @@ private:
     string configurationPath;
     GameManager gameManager;
     void file_reader(string path);
-    void createPLayer(istream& stream, string line);
+    void createPlayer(istream& stream, string line);
     void distributeCards();
     void copy(const Game& other);
 public:
