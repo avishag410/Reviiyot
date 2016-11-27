@@ -54,7 +54,7 @@ int Utils::generateKey(string cardString,int HighestNum)
 	valueStr=cardString[0];
 	
 	shape=Utils::parseShape(shapeStr);
-	cout << "Debug: [Utils::generate] \"shape\" is " << shapeStr << " ; enum says: " << shape << endl;
+	//cout << "Debug: [Utils::generate] \"shape\" is " << shapeStr << " ; enum says: " << shape << endl;
 	//parse value card
 	//figure card
 	if (valueStr.compare("J")==0)
