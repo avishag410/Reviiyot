@@ -11,9 +11,9 @@ using namespace std;
 Game::Game(char* configurationFile)
         :players(), deck("", 0), maxNumber(0), printMode(0), configurationPath(configurationFile), gameManager(deck){}
 
-Game::Game(const Game& other)
-        :players(other.players), deck(other.deck), maxNumber(other.maxNumber), printMode(other.printMode),
-         configurationPath(other.configurationPath), gameManager(other.gameManager){}
+Game::Game(const Game& other):deck("", 0) {
+    Game::copy(other);
+}
 
 void Game::file_reader(string path) {
     string line;
@@ -157,14 +157,12 @@ void Game::printNumberOfTurns(){
 
 void Game::copy(const Game& other){
     deck = other.deck;
-
     int i = 0;
     vector<Player*> temp = other.players;
     vector<Player*>::iterator it;
     for(it=temp.begin() ; it < temp.end(); it++, i++ ) {
-        players[i] = *it;
+        players.push_back((*it)->clone());
     }
-
     gameManager = other.gameManager;
 }
 

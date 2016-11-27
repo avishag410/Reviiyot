@@ -31,13 +31,13 @@ FigureCard::FigureCard(const FigureCard &rhs):Card(rhs), figure(Cards::Figure::J
 	set_figure(rhs.get_figure());
 }
 
-FigureCard& FigureCard::operator=(const FigureCard& rhs)
-{
-	set_shape(rhs.get_shape());
-	set_key(rhs.get_key());
-	valueString=rhs.valueString;
-	set_figure(rhs.get_figure());
-	
+FigureCard& FigureCard::operator=(const FigureCard& rhs) {
+	if(this != &rhs) {
+		set_shape(rhs.get_shape());
+		set_key(rhs.get_key());
+		valueString = rhs.valueString;
+		set_figure(rhs.get_figure());
+	}
 	return *this;
 }
 string FigureCard::toString()
@@ -54,11 +54,17 @@ Cards::Figure FigureCard::get_figure() const
 {
 	return figure;
 }
-	
+
+Card* FigureCard::clone(){
+    return new FigureCard(*this);
+}
+
+
 int FigureCard::cardType()
 {
 	return FIGURE_CARD;
 }
+
 FigureCard::~FigureCard()
 {
 	

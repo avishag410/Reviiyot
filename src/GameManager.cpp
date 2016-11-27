@@ -7,14 +7,22 @@
 #include <GameManager.h>
 using namespace std;
 // TODO do I really need vector of player or a pointer to a vector?
-GameManager::GameManager(Deck& _deck):players(), deck(&_deck) {}
+GameManager::GameManager():players(), deck(){
+}
+
+GameManager::GameManager(Deck& _deck):players(), deck(&_deck) {
+}
 
 GameManager::GameManager(const GameManager& other):players(), deck() {
    GameManager::copy(other);
 }
 
 void GameManager::setPlayers(vector<Player*> _players){
-    players = _players;
+    vector<Player*> temp = _players;
+    vector<Player*>::iterator it;
+    for(it=temp.begin() ; it < temp.end(); it++) {
+        players.push_back((*it));
+    }
 }
 
 Player* GameManager::getPlayerWithMaxCards(){
@@ -76,10 +84,8 @@ Player* GameManager::getPlayerByPosition(int position){
         return NULL;
 }
 Card* GameManager::getCardFromDeck(){
-    cout<<"cardddddsssss "<< endl;
     cout<< deck->toString() << endl;
     Card* card = deck->fetchCard();
-    cout<<"carddddd "<<card->toString()<< endl;
     return  card;
 }
 
@@ -90,11 +96,6 @@ int GameManager::getTotalOfPlayers(){
 
 GameManager &GameManager::operator=(const GameManager& other){
     if(this != &other){
-        vector<Player*>::iterator it;
-        for(it=players.begin() ; it < players.end(); it++) {
-            delete *it;
-        }
-
         GameManager::copy(other);
     }
     return *this;
@@ -102,10 +103,13 @@ GameManager &GameManager::operator=(const GameManager& other){
 
 void GameManager::copy(const GameManager& other){
 
-    int i = 0;
     vector<Player*> temp = other.players;
     vector<Player*>::iterator it;
-    for(it=temp.begin() ; it < temp.end(); it++, i++ ) {
-        players[i] = *it;
+    for(it=temp.begin() ; it < temp.end(); it++) {
+        players.push_back((*it));
     }
+}
+
+GameManager::~GameManager(){
+
 }

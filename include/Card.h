@@ -36,6 +36,7 @@ public:
 	Card(Cards::Shape shape, string value);
 	Card(const Card &rhs);//copy ctor
 	virtual string toString() = 0; //Returns the string representation of the card "<value><shape>" exp: "12S" or "QD"
+	virtual Card* clone() =0;
 	virtual ~Card();
 	int compare(Card &otherCard); 	//returns 0 if equals returns 1 if this>otherCard returns -1 if this<otherCard
 	int get_key() const;
@@ -58,6 +59,7 @@ public:
 	virtual string toString() override;
 	void set_figure(Cards::Figure f);
 	Cards::Figure get_figure() const;
+	virtual Card* clone() override;
 	virtual ~FigureCard() override;
 };
 
@@ -74,6 +76,7 @@ public:
 	virtual string toString() override;
 	void set_number(int n);
 	int get_number() const;
+	virtual Card* clone() override;
 	virtual ~NumericCard() override;
 };
 

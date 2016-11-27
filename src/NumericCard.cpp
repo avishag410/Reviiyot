@@ -23,12 +23,13 @@ NumericCard::NumericCard(const NumericCard &rhs):Card(rhs), number(0) {
 	set_number(rhs.get_number());
 }
 
-NumericCard& NumericCard::operator=(const NumericCard& rhs)
-{
-	set_shape(rhs.get_shape());
-	set_key(rhs.get_key());
-	valueString=rhs.valueString;
-	set_number(rhs.get_number());
+NumericCard& NumericCard::operator=(const NumericCard& rhs) {
+	if(this != &rhs) {
+		set_shape(rhs.get_shape());
+		set_key(rhs.get_key());
+		valueString = rhs.valueString;
+		set_number(rhs.get_number());
+	}
 	return *this;
 }
 
@@ -44,10 +45,15 @@ string NumericCard::toString(){
 	return valueString;
 }
 
+Card* NumericCard::clone(){
+    return new NumericCard(*this);
+}
+
 int NumericCard::cardType()
 {
 	return NUMERIC_CARD;
 }
+
 NumericCard::~NumericCard(void) {
 }
 

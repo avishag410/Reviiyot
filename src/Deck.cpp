@@ -73,14 +73,7 @@ void Deck::copy(const Deck& other){
     vector<Card*> temp = other.cards;
     vector<Card*>::iterator it;
     for(it=temp.begin(); it < temp.end(); it++ ) {
-        Card* card;
-
-        if(Utils::isNumericCard((*it)->toString())){
-            card = new NumericCard(*(NumericCard*)*it);
-        } else {
-            card = new FigureCard(*(FigureCard*)*it);
-        }
-        cards.push_back(card);
+        cards.push_back((*it)->clone());
     }
 }
 
