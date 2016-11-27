@@ -50,11 +50,12 @@ int Utils::generateKey(string cardString,int HighestNum)
 	int value,result;
 	
 	//parse the card represented string
-	shapeStr=cardString[1];
-	valueStr=cardString[0];
+	shapeStr=cardString[cardString.length()-1];
+	valueStr=cardString.substr(0,cardString.length()-1);
 	
 	shape=Utils::parseShape(shapeStr);
 	//cout << "Debug: [Utils::generate] \"shape\" is " << shapeStr << " ; enum says: " << shape << endl;
+	
 	//parse value card
 	//figure card
 	if (valueStr.compare("J")==0)
