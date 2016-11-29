@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <Hand.h>
-#include <Player.h>
-#include <Card.h>
-#include <GameManager.h>
+#include "Hand.h"
+#include "Player.h"
+#include "Card.h"
+#include "GameManager.h"
 
 using namespace std;
 
@@ -13,16 +13,19 @@ PlayerType1::PlayerType1(const PlayerType1 &other):Player(other){}
 
 void PlayerType1::makeMove(bool printMove){
     // search for the most-higher card
-    Card* card = PlayerType1::searchStrategyCard();
+    string cardValue = PlayerType1::searchStrategyCard();
+	//cout << "Debug : PlayerType1 : makeMove : player name="<<getName()<<endl;
+	//cout << "Debug : PlayerType1 : makeMove : cardValue="<<cardValue<<endl;
     // choose the player with the most cards
     // if there are two, then choose the one in higher position (whats that means?)c
     Player* player = Player::gameManager->getPlayerWithMaxCards(*this);
-    vector<Card*> given = player->giveCards(card->toString());
+    vector<Card*> given = player->giveCards(cardValue);//replace with cardValue
     if(given.size() > 0) {
         vector<Card*>::iterator it;
         for(it=given.begin() ; it < given.end(); it++ ) {
             //Hand::addCard(it);
         }
+		
     } else{
         Player::drawCard();
     }
@@ -32,9 +35,13 @@ Player* PlayerType1::clone(){
     return new PlayerType1(*this);
 }
 
-Card* PlayerType1::searchStrategyCard(){
-
-    return NULL ;
+string PlayerType1::searchStrategyCard()
+{
+	//search for the card he has the most
+	//Card* card;
+	//cout<<"Debug : PlayerType.cpp : searchStrategyCard" << "1"<<endl;
+	return getDuplicatedCard(true);
+	
 }
 
 PlayerType1::~PlayerType1(){
@@ -45,11 +52,11 @@ PlayerType2::PlayerType2(GameManager &gameManager, string name):Player::Player(g
 PlayerType2::PlayerType2(const PlayerType2 &other):Player(other){}
 void PlayerType2::makeMove(bool printMove){
     // search for the least-lower card
-    Card* card = PlayerType2::searchStrategyCard();
+    string cardValue = PlayerType2::searchStrategyCard();
     // choose the player with the most cards
     // if there are two, then choose the one in higher position (whats that means?)
     Player* player = Player::gameManager->getPlayerWithMaxCards(*this);
-    vector<Card*> given = player->giveCards(card->toString());
+    vector<Card*> given = player->giveCards(cardValue);
 
     if(given.size() > 0) {
         vector<Card*>::iterator it;
@@ -65,7 +72,7 @@ Player* PlayerType2::clone(){
     return new PlayerType2(*this);
 }
 
-Card* PlayerType2::searchStrategyCard(){
+string PlayerType2::searchStrategyCard(){
     return NULL ;
 }
 
@@ -84,9 +91,9 @@ void PlayerType3::makeMove(bool printMove){
     PlayerType3::playerIndex = next;
     Player* player = Player::gameManager->getPlayerByPosition(next);
     // search for the higher card
-    Card* card = PlayerType3::searchStrategyCard();
+    string cardValue= PlayerType3::searchStrategyCard();
 
-    vector<Card*> given = player->giveCards(card->toString());
+    vector<Card*> given = player->giveCards(cardValue);
 
     if(given.size() > 0) {
         vector<Card*>::iterator it;
@@ -102,7 +109,7 @@ Player* PlayerType3::clone(){
     return new PlayerType3(*this);
 }
 
-Card* PlayerType3::searchStrategyCard(){
+string PlayerType3::searchStrategyCard(){
     return NULL ;
 }
 
@@ -123,9 +130,9 @@ void PlayerType4::makeMove(bool printMove){
     Player* player = Player::gameManager->getPlayerByPosition(next);
 
     // search for the lowest card
-    Card* card = PlayerType4::searchStrategyCard();
+    string cardValue= PlayerType4::searchStrategyCard();
 
-    vector<Card*> given = player->giveCards(card->toString());
+    vector<Card*> given = player->giveCards(cardValue);
 
     if(given.size() > 0) {
         vector<Card*>::iterator it;
@@ -141,7 +148,7 @@ Player* PlayerType4::clone(){
     return new PlayerType4(*this);
 }
 
-Card* PlayerType4::searchStrategyCard(){
+string PlayerType4::searchStrategyCard(){
     return NULL ;
 }
 

@@ -52,7 +52,7 @@ void Game::file_reader(string path) {
             string deckCards = line;
             Deck temp(deckCards, maxNumber);
             deck = temp;
-			//cout << "Debug: deckCards = " << deckCards << endl;
+			//cout << "Debug: Game.cpp :deckCards = " << endl;
         }
 		
         // Create game manager
@@ -66,6 +66,7 @@ void Game::file_reader(string path) {
 
         // set all the players
         gameManager.setPlayers(players);
+		//cout << "Debug: Game.cpp : SetPlayers = " << endl;
     } else {
         cout << "Unable to open file" << endl;
     }
@@ -102,18 +103,27 @@ void Game::createPlayer(istream& myfile, string line) {
             playerType = stoi(player);
 
         // create player by type
+		Player *tempP;
         switch (playerType) {
             case 1:
-                players.push_back(new PlayerType1(gameManager, name));
+				tempP= new PlayerType1(gameManager, name);
+				tempP->setCardCounter(maxNumber);
+                players.push_back(tempP);
                 break;
             case 2:
-                players.push_back(new PlayerType2(gameManager, name));
+                tempP = new PlayerType2(gameManager, name);
+				tempP->setCardCounter(maxNumber);
+                players.push_back(tempP);
                 break;
             case 3:
-                players.push_back(new PlayerType3(gameManager, name, playerCounter));
+                tempP = new PlayerType3(gameManager, name, playerCounter);
+				tempP->setCardCounter(maxNumber);
+                players.push_back(tempP);
                 break;
             case 4:
-                players.push_back(new PlayerType4(gameManager, name, playerCounter));
+                tempP = new PlayerType4(gameManager, name, playerCounter);
+				tempP->setCardCounter(maxNumber);
+                players.push_back(tempP);
                 break;
 			default:
 				cout << "bugbugbug" << endl;
@@ -135,6 +145,7 @@ void Game::distributeCards(){
             cardsCounter++;
         }
     }
+	//cout << "Debug: Game.cpp : distribute = " << endl;
 }
 
 void Game::init(){
@@ -144,10 +155,10 @@ void Game::init(){
 
 void Game::play(){
 //print only if printMode is on == 1
-
+	cout << "Debug: Game: play "  << endl;
     // check if there is a winner
-    //while(!gameManager.thereIsAWinner()){
-    while(false){
+    while(!gameManager.thereIsAWinner()){
+    //while(false){
         // count the turns
         ++turnsCounter;
         // print state
@@ -158,7 +169,10 @@ void Game::play(){
         // print next move
         int nextPlayer = (turnsCounter-1)%players.size();
         players.at(nextPlayer)->makeMove(printMode==1);
+		break;
     }
+	
+	
 }
 
 // temporary print state
