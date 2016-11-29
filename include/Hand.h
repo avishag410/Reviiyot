@@ -17,6 +17,9 @@ private:
 	void copy(const Hand& other);
 protected:
     vector<Card*> searchCardsByValue(string value);
+	vector<int> cardIndexCounter;
+	virtual void setCardCounter(int n) = 0;//size for cardIndexCounter
+	string getDuplicatedCard(bool MinOrMax);//return string of card value. Min=0 Max=1
 public:
 	Hand();
 	Hand(const Hand& other);

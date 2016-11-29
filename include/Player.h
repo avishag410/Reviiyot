@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <vector>
-#include <Hand.h>
-#include <Deck.h>
+#include "Hand.h"
+#include "Deck.h"
 #include "GameManager.h"
 
 using namespace std;
@@ -21,12 +21,13 @@ public:
     virtual void makeMove(bool printMove) = 0;
     vector<Card*> giveCards(string value);
     virtual Player* clone() = 0;
+	virtual void setCardCounter(int n);
     Player& operator=(const Player& other);
     virtual ~Player();
 
 protected:
     GameManager* gameManager;
-    virtual Card* searchStrategyCard() = 0;
+    virtual string searchStrategyCard() = 0;
     void drawCard();
 };
 
@@ -40,7 +41,7 @@ public:
     virtual ~PlayerType1();
 
 private:
-    virtual Card* searchStrategyCard() override ;
+    virtual string searchStrategyCard() override ;
     void copy(const PlayerType1& other);
 };
 
@@ -53,7 +54,7 @@ public:
     PlayerType2& operator=(const PlayerType2& other);
     virtual ~PlayerType2();
 private:
-    virtual Card* searchStrategyCard() override ;
+    virtual string searchStrategyCard() override ;
     void copy(const PlayerType2& other);
 };
 
@@ -68,7 +69,7 @@ public:
 private:
     int playerIndex;
     int selfPosition;
-    virtual Card* searchStrategyCard() override ;
+    virtual string searchStrategyCard() override ;
     void copy(const PlayerType3& other);
 };
 
@@ -83,7 +84,7 @@ public:
 private:
     int playerIndex;
     int selfPosition;
-    virtual Card* searchStrategyCard() override ;
+    virtual string searchStrategyCard() override ;
     void copy(const PlayerType4& other);
 };
 

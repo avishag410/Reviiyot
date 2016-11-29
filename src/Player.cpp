@@ -1,10 +1,11 @@
-#include<iostream>
-#include<Player.h>
+#include <iostream>
+#include "Player.h"
 #include <map>
 #include <vector>
-#include <Hand.h>
-#include <GameManager.h>
+#include "Hand.h"
+#include "GameManager.h"
 #include "../include/Player.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -23,17 +24,21 @@ string Player::toString() {
 
 vector<Card*> Player::giveCards(string value) {
     // gets cards from deck
+	//cout<<"Debug : Player.cpp : giveCards" << "1"<<endl;
     vector<Card*> cards = Hand::searchCardsByValue(value);
+	//cout<<"Debug : Player.cpp : giveCards" << "2"<<endl;
     // remove cards from hand
     vector<Card*>::iterator it;
     for(it=cards.begin(); it < cards.end(); it++ ) {
         Hand::removeCard(**it);
     }
+	//cout<<"Debug : Player.cpp : giveCards" << "3"<<endl;
     // get cards from deck
     vector<Card*>::iterator it1;
     for(it1=cards.begin(); it1 < cards.end(); it1++ ) {
         Player::drawCard();
     }
+	//cout<<"Debug : Player.cpp : giveCards" << "4"<<endl;
     return cards;
 }
 
@@ -42,6 +47,12 @@ void Player::drawCard(){
     if(card != NULL){
         Hand::addCard(*card);
     }
+}
+
+void Player::setCardCounter(int n)
+{
+	cardIndexCounter.assign(n+3,0);//initialize vector that counts duplications of value
+	//Utils::printVector(cardIndexCounter);
 }
 
 Player::~Player() {

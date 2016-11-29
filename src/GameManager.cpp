@@ -84,7 +84,7 @@ Player* GameManager::getPlayerByPosition(int position){
         return NULL;
 }
 Card* GameManager::getCardFromDeck(){
-    cout<< deck->toString() << endl;
+    //cout<< deck->toString() << endl;
     Card* card = deck->fetchCard();
     return  card;
 }

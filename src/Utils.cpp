@@ -74,3 +74,14 @@ int Utils::generateKey(string cardString,int HighestNum)
 	result=value+shape;
 	return result;
 }
+
+void Utils::printVector(std::vector<int>& v)
+{
+	vector<int>::iterator it;
+	cout<<"printing vector"<<endl;
+	for(it=v.begin();it!=v.end() ; it++)
+	{
+		cout<<*it<<" ";
+	}
+	cout<<"\n";
+}

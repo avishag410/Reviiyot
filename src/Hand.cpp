@@ -1,14 +1,17 @@
 #include <iostream>
 #include <map>
 #include <vector>
-#include <Hand.h>
-#include<algorithm>
+#include "Hand.h"
+#include "Utils.h"
+#include <algorithm>
+#include <string.h>
 using namespace std;
 
-Hand::Hand():hashMap(), numOfCards(0){
+Hand::Hand():hashMap(), numOfCards(0), cardIndexCounter(){
+	
 }
 
-Hand::Hand(const Hand& other):hashMap(), numOfCards(0){
+Hand::Hand(const Hand& other):hashMap(), numOfCards(0), cardIndexCounter(){
 	Hand::copy(other);
 }
 
@@ -19,7 +22,7 @@ bool Hand::addCard(Card &card) {
 	
 	//delete taked card?
 	numOfCards++;
-	
+	cardIndexCounter.at(card.get_key()/4)++;
 	return ret.second;
 }
 
@@ -34,7 +37,7 @@ bool Hand::removeCard(Card &card)
 	hashMap.erase(removeIt);
 	
 	numOfCards--;
-	
+	cardIndexCounter.at(card.get_key()/4)--;
 	return ret.second;
 }
 
@@ -60,6 +63,72 @@ vector<Card*> Hand::searchCardsByValue(string value){
     return vector<Card*>();
 }
 
+string Hand::getDuplicatedCard(bool MinOrMax)
+{
+	string result;
+	int resultIndex,vectorIndex,compareDuplic,tmpVal;
+	
+	if(MinOrMax==false)//get ths value the players has the least
+	{
+		compareDuplic=cardIndexCounter.at(0);
+		resultIndex=0;
+		//starts the loop from begining of vector,to make sure we take the lowest value
+		for(vectorIndex = 0; vectorIndex < cardIndexCounter.size() ; vectorIndex++)
+		{	
+			tmpVal=cardIndexCounter.at(vectorIndex);
+			if( tmpVal < compareDuplic && tmpVal > 0 )
+			{
+				compareDuplic=tmpVal;
+				resultIndex = vectorIndex;
+			}	
+		}
+	}
+	else//get ths value the players has the most
+	{
+		compareDuplic=cardIndexCounter.at( cardIndexCounter.size() -1 );
+		resultIndex=cardIndexCounter.size() -1;
+		
+		for(vectorIndex = cardIndexCounter.size() -1 ; vectorIndex > 0 ; vectorIndex--)
+		{	
+			tmpVal=cardIndexCounter.at(vectorIndex);
+			if( tmpVal > compareDuplic  )
+			{
+				compareDuplic=tmpVal;
+				resultIndex = vectorIndex;
+				//cout << "Debug : Hand.cpp : getDuplicatedCard: in loop: "<<endl;
+				//cout << "tmpVal "<<tmpVal<<"resultIndex "<< resultIndex<<endl;
+			}	
+		}
+		//cout << "Debug : Hand.cpp : getDuplicatedCard :resultIndex= "<< resultIndex<<endl;
+		
+	}
+	
+	//sending the value string
+	const int HighestNumIndex = cardIndexCounter.size() - 4;
+	//cout << "Debug : Hand.cpp : getDuplicatedCard :HighestNumIndex= "<< HighestNumIndex<<endl;
+	//numeric value
+	if(resultIndex < HighestNumIndex )
+	{
+		result= std::to_string(resultIndex+2);
+	}
+	//figure value
+	else
+	{
+		if( resultIndex == HighestNumIndex)
+			result="J";
+		else if( resultIndex == HighestNumIndex+1 )
+			result="Q";
+		else if( resultIndex == HighestNumIndex+2 )
+			result="K";
+		else if( resultIndex == HighestNumIndex+3 )
+			result="A";
+		else
+			cout << "parsing ERROR in getDuplicatedCard " <<endl;
+	}
+	//cout << "Debug : Hand.cpp : getDuplicatedCard :"<<endl;
+	//Utils::printVector(cardIndexCounter);
+	return result;
+}
 pair<bool,int> Hand::checkForNumericSerias()
 {
 	int numToCheck = 0,counter=0;
@@ -201,5 +270,6 @@ Hand::~Hand() {
 	for(it=hashMap.begin() ; it!=hashMap.end() ; it++) {
 		delete (*it).second;
 	}
+	//TODO delete vector
 }
 	
