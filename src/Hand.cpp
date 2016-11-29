@@ -59,8 +59,22 @@ string Hand::toString()
 	return result;
 }
 
-vector<Card*> Hand::searchCardsByValue(string value){
-    return vector<Card*>();
+vector<Card*> Hand::searchCardsByValue(string value)
+{
+	vector<Card*> resultVec;
+	string cardValue,cardString;
+	map<int,Card*>::iterator it;
+	
+	for(it=hashMap.begin() ; it!=hashMap.end() ; it++)
+	{
+		//get only the value of the card
+		cardString=(it->second)->toString() ;
+		cardValue= (cardString).substr(0,cardString.length() -1);
+		if( value.compare( cardValue ) == 0 )
+			resultVec.push_back(it->second);
+	}
+	
+    return resultVec;
 }
 
 string Hand::getDuplicatedCard(bool MinOrMax)
@@ -70,8 +84,20 @@ string Hand::getDuplicatedCard(bool MinOrMax)
 	
 	if(MinOrMax==false)//get ths value the players has the least
 	{
-		compareDuplic=cardIndexCounter.at(0);
-		resultIndex=0;
+		//cout << "Debug : Hand.cpp : getDuplicatedCard: print vector"<<endl;
+		//Utils::printVector(cardIndexCounter);
+		
+		//start from the first non zero value in vector
+		for(vectorIndex = 0; vectorIndex < cardIndexCounter.size() ; vectorIndex++)
+		{
+			if( cardIndexCounter.at(vectorIndex) )
+			{
+				compareDuplic=cardIndexCounter.at(vectorIndex);
+				resultIndex=vectorIndex;
+				break;
+			}
+		}
+		
 		//starts the loop from begining of vector,to make sure we take the lowest value
 		for(vectorIndex = 0; vectorIndex < cardIndexCounter.size() ; vectorIndex++)
 		{	
@@ -80,8 +106,13 @@ string Hand::getDuplicatedCard(bool MinOrMax)
 			{
 				compareDuplic=tmpVal;
 				resultIndex = vectorIndex;
+				
+				//cout << "Debug : Hand.cpp : getDuplicatedCard: in loop: "<<endl;
+				//cout << "tmpVal "<<tmpVal<<"resultIndex "<< resultIndex<<endl;
 			}	
 		}
+		
+		//cout << "Debug : Hand.cpp : getDuplicatedCard :resultIndex= "<< resultIndex<<endl;
 	}
 	else//get ths value the players has the most
 	{
@@ -95,11 +126,10 @@ string Hand::getDuplicatedCard(bool MinOrMax)
 			{
 				compareDuplic=tmpVal;
 				resultIndex = vectorIndex;
-				//cout << "Debug : Hand.cpp : getDuplicatedCard: in loop: "<<endl;
-				//cout << "tmpVal "<<tmpVal<<"resultIndex "<< resultIndex<<endl;
+				
 			}	
 		}
-		//cout << "Debug : Hand.cpp : getDuplicatedCard :resultIndex= "<< resultIndex<<endl;
+		
 		
 	}
 	
