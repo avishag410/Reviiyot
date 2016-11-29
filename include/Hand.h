@@ -19,7 +19,7 @@ protected:
     vector<Card*> searchCardsByValue(string value);
 	vector<int> cardIndexCounter;
 	virtual void setCardCounter(int n) = 0;//size for cardIndexCounter
-	string getDuplicatedCard(bool MinOrMax);//return string of card value. Min=0 Max=1
+	string searchforDuplicates(bool searchMostCommon);//return string of card value. Min=0 Max=1
 public:
 	Hand();
 	Hand(const Hand& other);
@@ -31,6 +31,8 @@ public:
     string toString(); // Return a list of the cards, separated by space, in one line, in a sorted order, ex: "2S 5D 10H"
 	virtual ~Hand()=0;
 	Hand& operator=(const Hand& other);
+	void removeSerialCards();
+	void removeCardsByKey(int key);
 };
 
 #endif

@@ -80,7 +80,7 @@ void Game::createPlayer(istream& myfile, string line) {
         while (myfile.good() && (line.size() == 0 || line.find("#") == 0)) {
             getline (myfile,line);
         }
-		if(line.size() == 0) break;
+
         string player = line;
         string delimiter = " ";
         size_t pos = 0;
@@ -99,7 +99,7 @@ void Game::createPlayer(istream& myfile, string line) {
         }
 
         // get player type
-        if(player.size() > 0)
+        if(player.size() > 0 && !player.empty() && player.find('\n') == std::string::npos && player.find('\0') == std::string::npos)
             playerType = stoi(player);
 
         // create player by type
@@ -145,7 +145,6 @@ void Game::distributeCards(){
             cardsCounter++;
         }
     }
-	//cout << "Debug: Game.cpp : distribute = " << endl;
 }
 
 void Game::init(){
@@ -157,8 +156,8 @@ void Game::play(){
 //print only if printMode is on == 1
 	
     // check if there is a winner
-    //while(!gameManager.thereIsAWinner()){
-    while(false){
+    while(!gameManager.thereIsAWinner()){
+    //while(false){
         // count the turns
         ++turnsCounter;
         // print state

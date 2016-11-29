@@ -12,27 +12,27 @@ PlayerType1::PlayerType1(GameManager &gameManager, string name):Player::Player(g
 PlayerType1::PlayerType1(const PlayerType1 &other):Player(other){}
 
 void PlayerType1::makeMove(bool printMove){
-    cout <<getName()<< " asked ";
-	
 	// choose the player with the most cards
     // if there are two, then choose the one in higher position (whats that means?)c
     Player* player = Player::gameManager->getPlayerWithMaxCards(*this);
-	cout<<player->getName();
-	
+
 	// search for the most-higher card
     string cardValue = PlayerType1::searchStrategyCard();
-	cout<<" for the value "<<cardValue<<endl;
-	cout<<endl;
-    
+
     vector<Card*> given = player->giveCards(cardValue);
     if(given.size() > 0) {
         vector<Card*>::iterator it;
         for(it=given.begin() ; it < given.end(); it++ ) {
             addCard(**it);		
         }
-	
     } else{
         this->drawCard();
+    }
+
+    removeSerialCards();
+
+    if(printMove){
+        cout <<getName()<< " asked "<<player->getName()<<" for the value "<<cardValue<<endl;
     }
 }
 
@@ -44,7 +44,7 @@ string PlayerType1::searchStrategyCard()
 {
 	//search for the card he has the most
 	//cout<<"Debug : PlayerType.cpp : searchStrategyCard" << "1"<<endl;
-	return getDuplicatedCard(true);
+	return searchforDuplicates(true);
 	
 }
 
@@ -77,6 +77,7 @@ void PlayerType2::makeMove(bool printMove){
     } else{
         Player::drawCard();
     }
+    removeSerialCards();
 }
 
 Player* PlayerType2::clone(){
@@ -84,7 +85,7 @@ Player* PlayerType2::clone(){
 }
 
 string PlayerType2::searchStrategyCard(){
-    return getDuplicatedCard(false);
+    return searchforDuplicates(false);
 }
 
 PlayerType2::~PlayerType2(){
@@ -114,6 +115,8 @@ void PlayerType3::makeMove(bool printMove){
     } else{
         Player::drawCard();
     }
+
+    removeSerialCards();
 }
 
 Player* PlayerType3::clone(){

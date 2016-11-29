@@ -77,14 +77,14 @@ vector<Card*> Hand::searchCardsByValue(string value)
     return resultVec;
 }
 
-string Hand::getDuplicatedCard(bool MinOrMax)
+string Hand::searchforDuplicates(bool searchMostCommon)
 {
 	string result;
 	int resultIndex,vectorIndex,compareDuplic,tmpVal;
 	
-	if(MinOrMax==false)//get ths value the players has the least
+	if(!searchMostCommon)//get ths value the players has the least
 	{
-		//cout << "Debug : Hand.cpp : getDuplicatedCard: print vector"<<endl;
+		//cout << "Debug : Hand.cpp : searchforDuplicates: print vector"<<endl;
 		//Utils::printVector(cardIndexCounter);
 		
 		//start from the first non zero value in vector
@@ -107,12 +107,12 @@ string Hand::getDuplicatedCard(bool MinOrMax)
 				compareDuplic=tmpVal;
 				resultIndex = vectorIndex;
 				
-				//cout << "Debug : Hand.cpp : getDuplicatedCard: in loop: "<<endl;
+				//cout << "Debug : Hand.cpp : searchforDuplicates: in loop: "<<endl;
 				//cout << "tmpVal "<<tmpVal<<"resultIndex "<< resultIndex<<endl;
 			}	
 		}
 		
-		//cout << "Debug : Hand.cpp : getDuplicatedCard :resultIndex= "<< resultIndex<<endl;
+		//cout << "Debug : Hand.cpp : searchforDuplicates :resultIndex= "<< resultIndex<<endl;
 	}
 	else//get ths value the players has the most
 	{
@@ -135,7 +135,7 @@ string Hand::getDuplicatedCard(bool MinOrMax)
 	
 	//sending the value string
 	const int HighestNumIndex = cardIndexCounter.size() - 4;
-	//cout << "Debug : Hand.cpp : getDuplicatedCard :HighestNumIndex= "<< HighestNumIndex<<endl;
+	//cout << "Debug : Hand.cpp : searchforDuplicates :HighestNumIndex= "<< HighestNumIndex<<endl;
 	//numeric value
 	if(resultIndex < HighestNumIndex )
 	{
@@ -153,12 +153,60 @@ string Hand::getDuplicatedCard(bool MinOrMax)
 		else if( resultIndex == HighestNumIndex+3 )
 			result="A";
 		else
-			cout << "parsing ERROR in getDuplicatedCard " <<endl;
+			cout << "parsing ERROR in searchforDuplicates " <<endl;
 	}
-	//cout << "Debug : Hand.cpp : getDuplicatedCard :"<<endl;
+	//cout << "Debug : Hand.cpp : searchforDuplicates :"<<endl;
 	//Utils::printVector(cardIndexCounter);
 	return result;
 }
+
+void Hand::removeSerialCards(){
+	int counter = 0;
+	int value = 0;
+	map<int, Card*>::reverse_iterator reverseIt;
+	for(reverseIt = hashMap.rbegin(); reverseIt != hashMap.rend(); ++reverseIt){
+		if(counter == 0){
+			int key = reverseIt->first;
+			value = key/4;
+			++counter;
+
+			cout << "key: " << key << " counter: " << counter <<endl;
+		} else if(reverseIt->first/ 4 == value){
+			++counter;
+			cout << "same value... " << " counter: " << counter <<endl;
+		} else if(reverseIt->first/4 != value){
+			int key = reverseIt->first;
+			value = key/4;
+			cout << "new value key: " << key << " counter: " << counter <<endl;
+
+			if(counter == 4){
+				removeCardsByKey(value*4);
+				cout << "back to removing" <<endl;
+			}
+
+			counter = 1;
+		}
+	}
+
+	if(counter == 4){
+		removeCardsByKey(value*4);
+		cout << "back to removing2" <<endl;
+	}
+}
+
+void Hand::removeCardsByKey(int key){
+
+	int minVal = key - (key%4);
+	int maxVal = 4 - (key%4) + key -1;
+
+	cout << "remove cards by key: " << key << " minVal: " << minVal<< " maxVal: " << maxVal <<endl;
+
+	for(int i = maxVal; i >= minVal; i--){
+		cout << "remove card in indexy: " << i <<endl;
+		removeCard(*(hashMap.at(i)));
+	}
+}
+
 pair<bool,int> Hand::checkForNumericSerias()
 {
 	int numToCheck = 0,counter=0;
