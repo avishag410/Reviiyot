@@ -33,6 +33,7 @@ void PlayerType1::makeMove(bool printMove){
 
     if(printMove){
         cout <<getName()<< " asked "<<player->getName()<<" for the value "<<cardValue<<endl;
+        cout<<endl;
     }
 }
 
@@ -55,18 +56,13 @@ PlayerType1::~PlayerType1(){
 PlayerType2::PlayerType2(GameManager &gameManager, string name):Player::Player(gameManager,name){}
 PlayerType2::PlayerType2(const PlayerType2 &other):Player(other){}
 void PlayerType2::makeMove(bool printMove){
-	cout <<getName()<< " asked ";
-	
 	// choose the player with the most cards
     // if there are two, then choose the one in higher position (whats that means?)
     Player* player = Player::gameManager->getPlayerWithMaxCards(*this);
-	cout<<player->getName();
-	
+
     // search for the least-lower card
     string cardValue = PlayerType2::searchStrategyCard();
-    cout<<" for the value "<<cardValue<<endl;
-	cout<<endl;
-	
+
     vector<Card*> given = player->giveCards(cardValue);
 
     if(given.size() > 0) {
@@ -75,8 +71,14 @@ void PlayerType2::makeMove(bool printMove){
             addCard(**it);
         }
     } else{
-        Player::drawCard();
+        drawCard();
     }
+
+    if(printMove){
+        cout <<getName()<< " asked "<<player->getName()<<" for the value "<<cardValue<<endl;
+        cout<<endl;
+    }
+
     removeSerialCards();
 }
 
@@ -92,7 +94,7 @@ PlayerType2::~PlayerType2(){
 
 }
 
-PlayerType3::PlayerType3(GameManager &gameManager, string name, int _selfPosition):Player::Player(gameManager,name), playerIndex(0), selfPosition(_selfPosition){}
+PlayerType3::PlayerType3(GameManager &gameManager, string name, int _selfPosition):Player::Player(gameManager,name), playerIndex(-1), selfPosition(_selfPosition){}
 PlayerType3::PlayerType3(const PlayerType3 &other):Player(other), playerIndex(other.playerIndex), selfPosition(other.selfPosition){}
 void PlayerType3::makeMove(bool printMove){
     // counter - cyclic order
@@ -110,13 +112,19 @@ void PlayerType3::makeMove(bool printMove){
     if(given.size() > 0) {
         vector<Card*>::iterator it;
         for(it=given.begin() ; it < given.end(); it++ ) {
-            //Hand::addCard(it);
+            addCard(**it);
         }
     } else{
-        Player::drawCard();
+        drawCard();
     }
 
+
+    if(printMove){
+        cout <<getName()<< " asked "<<player->getName()<<" for the value "<<cardValue<<endl;
+        cout<<endl;
+    }
     removeSerialCards();
+
 }
 
 Player* PlayerType3::clone(){
@@ -124,7 +132,7 @@ Player* PlayerType3::clone(){
 }
 
 string PlayerType3::searchStrategyCard(){
-    return NULL ;
+    return getMaxKeyValue();
 }
 
 
@@ -132,7 +140,7 @@ PlayerType3::~PlayerType3(){
 
 }
 
-PlayerType4::PlayerType4(GameManager &gameManager, string name, int _selfPosition):Player::Player(gameManager,name), playerIndex(0), selfPosition(_selfPosition){}
+PlayerType4::PlayerType4(GameManager &gameManager, string name, int _selfPosition):Player::Player(gameManager,name), playerIndex(-1), selfPosition(_selfPosition){}
 PlayerType4::PlayerType4(const PlayerType4 &other):Player(other), playerIndex(other.playerIndex), selfPosition(other.selfPosition){}
 void PlayerType4::makeMove(bool printMove){
     // counter - cyclic order
@@ -151,11 +159,19 @@ void PlayerType4::makeMove(bool printMove){
     if(given.size() > 0) {
         vector<Card*>::iterator it;
         for(it=given.begin() ; it < given.end(); it++ ) {
-            //Hand::addCard(it);
+            addCard(**it);
         }
     } else{
         Player::drawCard();
     }
+
+
+    if(printMove){
+        cout <<getName()<< " asked "<<player->getName()<<" for the value "<<cardValue<<endl;
+        cout<<endl;
+    }
+    removeSerialCards();
+
 }
 
 Player* PlayerType4::clone(){
@@ -163,7 +179,7 @@ Player* PlayerType4::clone(){
 }
 
 string PlayerType4::searchStrategyCard(){
-    return NULL ;
+    return getMinKeyValue() ;
 }
 
 

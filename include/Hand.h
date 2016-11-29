@@ -33,6 +33,8 @@ public:
 	Hand& operator=(const Hand& other);
 	void removeSerialCards();
 	void removeCardsByKey(int key);
+    string getMaxKeyValue();
+    string getMinKeyValue();
 };
 
 #endif

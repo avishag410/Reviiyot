@@ -64,7 +64,7 @@ vector<Card*> Hand::searchCardsByValue(string value)
 	vector<Card*> resultVec;
 	string cardValue,cardString;
 	map<int,Card*>::iterator it;
-	
+
 	for(it=hashMap.begin() ; it!=hashMap.end() ; it++)
 	{
 		//get only the value of the card
@@ -84,9 +84,6 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 	
 	if(!searchMostCommon)//get ths value the players has the least
 	{
-		//cout << "Debug : Hand.cpp : searchforDuplicates: print vector"<<endl;
-		//Utils::printVector(cardIndexCounter);
-		
 		//start from the first non zero value in vector
 		for(vectorIndex = 0; vectorIndex < cardIndexCounter.size() ; vectorIndex++)
 		{
@@ -106,13 +103,8 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 			{
 				compareDuplic=tmpVal;
 				resultIndex = vectorIndex;
-				
-				//cout << "Debug : Hand.cpp : searchforDuplicates: in loop: "<<endl;
-				//cout << "tmpVal "<<tmpVal<<"resultIndex "<< resultIndex<<endl;
-			}	
+			}
 		}
-		
-		//cout << "Debug : Hand.cpp : searchforDuplicates :resultIndex= "<< resultIndex<<endl;
 	}
 	else//get ths value the players has the most
 	{
@@ -126,16 +118,12 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 			{
 				compareDuplic=tmpVal;
 				resultIndex = vectorIndex;
-				
-			}	
+			}
 		}
-		
-		
 	}
 	
 	//sending the value string
 	const int HighestNumIndex = cardIndexCounter.size() - 4;
-	//cout << "Debug : Hand.cpp : searchforDuplicates :HighestNumIndex= "<< HighestNumIndex<<endl;
 	//numeric value
 	if(resultIndex < HighestNumIndex )
 	{
@@ -155,8 +143,6 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 		else
 			cout << "parsing ERROR in searchforDuplicates " <<endl;
 	}
-	//cout << "Debug : Hand.cpp : searchforDuplicates :"<<endl;
-	//Utils::printVector(cardIndexCounter);
 	return result;
 }
 
@@ -169,28 +155,22 @@ void Hand::removeSerialCards(){
 			int key = reverseIt->first;
 			value = key/4;
 			++counter;
-
-			cout << "key: " << key << " counter: " << counter <<endl;
 		} else if(reverseIt->first/ 4 == value){
 			++counter;
-			cout << "same value... " << " counter: " << counter <<endl;
 		} else if(reverseIt->first/4 != value){
-			int key = reverseIt->first;
+            int key = reverseIt->first;
+
+            if(counter == 4){
+                removeCardsByKey(value*4);
+            }
+
 			value = key/4;
-			cout << "new value key: " << key << " counter: " << counter <<endl;
-
-			if(counter == 4){
-				removeCardsByKey(value*4);
-				cout << "back to removing" <<endl;
-			}
-
 			counter = 1;
 		}
 	}
 
 	if(counter == 4){
 		removeCardsByKey(value*4);
-		cout << "back to removing2" <<endl;
 	}
 }
 
@@ -199,10 +179,7 @@ void Hand::removeCardsByKey(int key){
 	int minVal = key - (key%4);
 	int maxVal = 4 - (key%4) + key -1;
 
-	cout << "remove cards by key: " << key << " minVal: " << minVal<< " maxVal: " << maxVal <<endl;
-
 	for(int i = maxVal; i >= minVal; i--){
-		cout << "remove card in indexy: " << i <<endl;
 		removeCard(*(hashMap.at(i)));
 	}
 }
@@ -318,6 +295,20 @@ pair<bool,Figure> Hand::checkForFigureSerias()
 	answer.second=figureToCheck;//cant assign null type or 0
 	return answer;
 	
+}
+
+string Hand::getMaxKeyValue(){
+	map<int, Card*>::reverse_iterator reverseIt;
+	reverseIt = hashMap.rbegin();
+	string cardValue = (*reverseIt).second->toString();
+	return (cardValue.substr(0, cardValue.size() - 1));
+}
+
+string Hand::getMinKeyValue(){
+	map<int, Card*>::iterator it;
+	it = hashMap.begin();
+	string cardValue = (*it).second->toString();
+	return (cardValue.substr(0, cardValue.size() - 1));
 }
 
 void Hand::copy(const Hand& other){

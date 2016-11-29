@@ -154,7 +154,7 @@ void Game::init(){
 
 void Game::play(){
 //print only if printMode is on == 1
-	
+
     // check if there is a winner
     while(!gameManager.thereIsAWinner()){
     //while(false){
@@ -170,7 +170,7 @@ void Game::play(){
 		//cout << "Debug: Game: play :next player"<< nextPlayer << endl;
         players.at(nextPlayer)->makeMove(printMode==1);
 		
-		
+
     }
 	
 }
