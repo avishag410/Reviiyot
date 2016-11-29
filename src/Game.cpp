@@ -155,10 +155,10 @@ void Game::init(){
 
 void Game::play(){
 //print only if printMode is on == 1
-	cout << "Debug: Game: play "  << endl;
+	
     // check if there is a winner
-    while(!gameManager.thereIsAWinner()){
-    //while(false){
+    //while(!gameManager.thereIsAWinner()){
+    while(false){
         // count the turns
         ++turnsCounter;
         // print state
@@ -168,10 +168,11 @@ void Game::play(){
         }
         // print next move
         int nextPlayer = (turnsCounter-1)%players.size();
+		//cout << "Debug: Game: play :next player"<< nextPlayer << endl;
         players.at(nextPlayer)->makeMove(printMode==1);
-		break;
+		
+		
     }
-	
 	
 }
 
