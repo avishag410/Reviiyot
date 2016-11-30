@@ -4,35 +4,35 @@ CFLAGS=-g -Wall -Weffc++ -std=c++11 -c -Iinclude
 
 #All Targets
 all: Reviiyot
-Reviiyot: main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o Hand.o Player.o PlayerType1.o GameManager.o Game.o
-	$(CC) main.o Card.o KeyGenerator.o FigureCard.o NumericCard.o Deck.o Utils.o Hand.o Player.o PlayerType1.o GameManager.o Game.o -o reviiot
+Reviiyot: bin/reviiyot.o bin/Card.o bin/KeyGenerator.o bin/FigureCard.o bin/NumericCard.o bin/Deck.o bin/Utils.o bin/Hand.o bin/Player.o bin/PlayerType1.o bin/GameManager.o bin/Game.o
+	$(CC) bin/reviiyot.o bin/Card.o bin/KeyGenerator.o bin/FigureCard.o bin/NumericCard.o bin/Deck.o bin/Utils.o bin/Hand.o bin/Player.o bin/PlayerType1.o bin/GameManager.o bin/Game.o -o bin/reviiot
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+bin/reviiyot.o: reviiyot.cpp
+	$(CC) $(CFLAGS) -o bin/reviiyot.o reviiyot.cpp
 
-Card.o: src/Card.cpp
-	$(CC) $(CFLAGS) src/Card.cpp
+bin/Card.o: src/Card.cpp
+	$(CC) $(CFLAGS) -o bin/Card.o src/Card.cpp
 
-FigureCard.o: src/FigureCard.cpp
-	$(CC) $(CFLAGS) src/FigureCard.cpp
-NumericCard.o: src/NumericCard.cpp
-	$(CC) $(CFLAGS) src/NumericCard.cpp
+bin/FigureCard.o: src/FigureCard.cpp
+	$(CC) $(CFLAGS) -o bin/FigureCard.o src/FigureCard.cpp
+bin/NumericCard.o: src/NumericCard.cpp
+	$(CC) $(CFLAGS) -o bin/NumericCard.o src/NumericCard.cpp
 
-KeyGenerator.o: src/KeyGenerator.cpp
-	$(CC) $(CFLAGS) src/KeyGenerator.cpp
-Deck.o: src/Deck.cpp
-	$(CC) $(CFLAGS) src/Deck.cpp
-Utils.o: src/Utils.cpp
-	$(CC) $(CFLAGS) src/Utils.cpp
-Player.o: src/Player.cpp
-	$(CC) $(CFLAGS) src/Player.cpp
-PlayerType1.o: src/PlayerType1.cpp
-	$(CC) $(CFLAGS) src/PlayerType1.cpp
-Hand.o: src/Hand.cpp
-	$(CC) $(CFLAGS) src/Hand.cpp
-GameManager.o: src/GameManager.cpp
-	$(CC) $(CFLAGS) src/GameManager.cpp
-Game.o: src/Game.cpp
-	$(CC) $(CFLAGS) src/Game.cpp
+bin/KeyGenerator.o: src/KeyGenerator.cpp
+	$(CC) $(CFLAGS) -o bin/KeyGenerator.o src/KeyGenerator.cpp
+bin/Deck.o: src/Deck.cpp
+	$(CC) $(CFLAGS) -o bin/Deck.o src/Deck.cpp
+bin/Utils.o: src/Utils.cpp
+	$(CC) $(CFLAGS) -o bin/Utils.o src/Utils.cpp
+bin/Player.o: src/Player.cpp
+	$(CC) $(CFLAGS) -o bin/Player.o src/Player.cpp
+bin/PlayerType1.o: src/PlayerType1.cpp
+	$(CC) $(CFLAGS) -o bin/PlayerType1.o src/PlayerType1.cpp
+bin/Hand.o: src/Hand.cpp
+	$(CC) $(CFLAGS) -o bin/Hand.o src/Hand.cpp
+bin/GameManager.o: src/GameManager.cpp
+	$(CC) $(CFLAGS) -o bin/GameManager.o src/GameManager.cpp
+bin/Game.o: src/Game.cpp
+	$(CC) $(CFLAGS) -o bin/Game.o src/Game.cpp
 clean:
-	rm -rf *.o reviiot
+	rm -rf bin/*.o bin/reviiot
