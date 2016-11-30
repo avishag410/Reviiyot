@@ -175,7 +175,7 @@ void Game::play(){
 
 // temporary print state
 void Game::printState() {
-	cout<<"Deck : "<< deck.toString() << endl;
+	cout<<"Deck: "<< deck.toString() << endl;
 	vector<Player *>::iterator it;
 	for( it=players.begin() ; it!=players.end() ; it++) {
         cout<< (*it)->toString() << endl;
@@ -185,7 +185,7 @@ void Game::printState() {
 void Game::printWinner(){
     vector<Player*> winners = gameManager.getWinners();
     if(winners.size() == 2){
-        cout<<"***** The winner are: "<< winners.at(0)->getName()<< " and " << winners.at(1)->getName() <<" *****" << endl;
+        cout<<"***** The winners are: "<< winners.at(0)->getName()<< " and " << winners.at(1)->getName() <<" *****" << endl;
     } else if (winners.size() == 1){
         cout<<"***** The Winner is: "<< winners.at(0)->getName()<<" *****" << endl;
     }
