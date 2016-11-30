@@ -85,7 +85,7 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 	if(!searchMostCommon)//get ths value the players has the least
 	{
 		//start from the first non zero value in vector
-		for(vectorIndex = 0; vectorIndex < cardIndexCounter.size() ; vectorIndex++)
+		for(vectorIndex = 0; vectorIndex < (signed int)cardIndexCounter.size() ; vectorIndex++)
 		{
 			if( cardIndexCounter.at(vectorIndex) )
 			{
@@ -96,7 +96,7 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 		}
 		
 		//starts the loop from begining of vector,to make sure we take the lowest value
-		for(vectorIndex = 0; vectorIndex < cardIndexCounter.size() ; vectorIndex++)
+		for(vectorIndex = 0; vectorIndex < (signed int)cardIndexCounter.size() ; vectorIndex++)
 		{	
 			tmpVal=cardIndexCounter.at(vectorIndex);
 			if( tmpVal < compareDuplic && tmpVal > 0 )
@@ -113,7 +113,7 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 		compareDuplic=cardIndexCounter.at( cardIndexCounter.size() -1 );
 		resultIndex=cardIndexCounter.size() -1;
 		
-		for(vectorIndex = cardIndexCounter.size() -1 ; vectorIndex >= 0 ; vectorIndex--)
+		for(vectorIndex = (signed int)cardIndexCounter.size() -1 ; vectorIndex >= 0 ; vectorIndex--)
 		{	
 			tmpVal=cardIndexCounter.at(vectorIndex);
 			if( tmpVal > compareDuplic  )
