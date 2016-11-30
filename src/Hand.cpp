@@ -108,10 +108,12 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 	}
 	else//get ths value the players has the most
 	{
+		//cout << "Debug: hand.cpp: searchforDuplicates :vector " << endl;
+		//Utils::printVector(cardIndexCounter);
 		compareDuplic=cardIndexCounter.at( cardIndexCounter.size() -1 );
 		resultIndex=cardIndexCounter.size() -1;
 		
-		for(vectorIndex = cardIndexCounter.size() -1 ; vectorIndex > 0 ; vectorIndex--)
+		for(vectorIndex = cardIndexCounter.size() -1 ; vectorIndex >= 0 ; vectorIndex--)
 		{	
 			tmpVal=cardIndexCounter.at(vectorIndex);
 			if( tmpVal > compareDuplic  )
@@ -120,6 +122,7 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 				resultIndex = vectorIndex;
 			}
 		}
+		//cout<<"Debug: hand.cpp: searchforDuplicates: compareDuplic"<<compareDuplic<<"resultIndex"<<resultIndex<< endl;
 	}
 	
 	//sending the value string

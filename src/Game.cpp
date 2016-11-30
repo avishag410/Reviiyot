@@ -157,7 +157,6 @@ void Game::play(){
 
     // check if there is a winner
     while(!gameManager.thereIsAWinner()){
-    //while(false){
         // count the turns
         ++turnsCounter;
         // print state
