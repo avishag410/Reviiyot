@@ -224,11 +224,14 @@ Hand& Hand::operator=(const Hand& other){
 	return *this;
 }
 
-Hand::~Hand() {
-	map<int,Card*>::iterator it;
-	for(it=hashMap.begin() ; it!=hashMap.end() ; it++) {
-		delete (*it).second;
+Hand::~Hand() 
+{
+	//cout<<"Debug : Hand.cpp :dtor" <<endl;
+
+	map<int,Card*>::iterator MapIt;
+	for(MapIt=hashMap.begin() ; MapIt!=hashMap.end() ; MapIt++) {
+		delete (*MapIt).second;
 	}
-	//TODO delete vector
+	
 }
 	

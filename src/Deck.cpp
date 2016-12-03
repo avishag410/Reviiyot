@@ -42,6 +42,7 @@ void Deck::insertCard(string cardStr,int HighestNum){
 	int key=Utils::generateKey(cardStr,HighestNum);
 	card->set_key(key);
     Deck::cards.insert(Deck::cards.begin(), card);
+	
 }
 
 // remember that calling this method we lost a reference to a card and someone else needs to release its memory
@@ -70,28 +71,33 @@ string Deck::toString(){
 }
 
 void Deck::copy(const Deck& other){
+
     vector<Card*> temp = other.cards;
     vector<Card*>::iterator it;
     for(it=temp.begin(); it < temp.end(); it++ ) {
         cards.push_back((*it)->clone());
     }
+	
 }
 
 Deck& Deck::operator=(const Deck& other){
     if(this != &other){
         vector<Card*>::iterator it;
         for(it=cards.begin() ; it < cards.end(); it++) {
-            delete *it;
+            delete(*it);
         }
 
         Deck::copy(other);
+		
     }
     return *this;
 }
 
-Deck::~Deck(){
+Deck::~Deck()
+{
     vector<Card*>::iterator it;
     for(it=cards.begin(); it < cards.end(); it++ ) {
-        delete *it;
+        delete(*it);
     }
+	
 }

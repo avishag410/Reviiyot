@@ -50,8 +50,9 @@ void Game::file_reader(string path) {
             }
 			
             string deckCards = line;
-            Deck temp(deckCards, maxNumber);
-            deck = temp;
+             Deck temp(deckCards, maxNumber);
+			 deck=temp;
+            
 			//cout << "Debug: Game.cpp :deckCards = " << endl;
         }
 		
@@ -126,6 +127,7 @@ void Game::createPlayer(istream& myfile, string line) {
                 players.push_back(tempP);
                 break;
 			default:
+				cout << "bugbugbug" << endl;
 				break;
         }
 
@@ -198,6 +200,7 @@ void Game::printNumberOfTurns(){
 
 void Game::copy(const Game& other){
     deck = other.deck;
+	
     int i = 0;
     vector<Player*> temp = other.players;
     vector<Player*>::iterator it;
@@ -219,9 +222,11 @@ Game& Game::operator=(const Game& other){
     return *this;
 }
 
-Game::~Game(){
+Game::~Game()
+{
     vector<Player*>::iterator it;
     for(it=players.begin() ; it < players.end(); it++) {
-        delete *it;
+        delete(*it);
     }
+
 }
