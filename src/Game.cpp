@@ -127,7 +127,6 @@ void Game::createPlayer(istream& myfile, string line) {
                 players.push_back(tempP);
                 break;
 			default:
-				cout << "bugbugbug" << endl;
 				break;
         }
 
