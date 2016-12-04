@@ -151,6 +151,7 @@ string Hand::searchforDuplicates(bool searchMostCommon)
 void Hand::removeSerialCards(){
 	int counter = 0;
 	int value = 0;
+    vector<int> valuesToRemove;
 	map<int, Card*>::reverse_iterator reverseIt;
 	for(reverseIt = hashMap.rbegin(); reverseIt != hashMap.rend(); ++reverseIt){
 		if(counter == 0){
@@ -163,7 +164,7 @@ void Hand::removeSerialCards(){
             int key = reverseIt->first;
 
             if(counter == 4){
-                removeCardsByKey(value*4);
+                valuesToRemove.push_back(value*4);
             }
 
 			value = key/4;
@@ -172,8 +173,12 @@ void Hand::removeSerialCards(){
 	}
 
 	if(counter == 4){
-		removeCardsByKey(value*4);
+        valuesToRemove.push_back(value*4);
 	}
+
+    for(int curr:valuesToRemove){
+        removeCardsByKey(curr);
+    }
 }
 
 void Hand::removeCardsByKey(int key){
