@@ -7,8 +7,8 @@ all: Reviiyot
 Reviiyot: bin/reviiyot.o bin/Card.o bin/KeyGenerator.o bin/FigureCard.o bin/NumericCard.o bin/Deck.o bin/Utils.o bin/Hand.o bin/Player.o bin/PlayerType1.o bin/GameManager.o bin/Game.o
 	$(CC) bin/reviiyot.o bin/Card.o bin/KeyGenerator.o bin/FigureCard.o bin/NumericCard.o bin/Deck.o bin/Utils.o bin/Hand.o bin/Player.o bin/PlayerType1.o bin/GameManager.o bin/Game.o -o bin/reviiot
 
-bin/reviiyot.o: reviiyot.cpp
-	$(CC) $(CFLAGS) -o bin/reviiyot.o reviiyot.cpp
+bin/reviiyot.o: src/reviiyot.cpp
+	$(CC) $(CFLAGS) -o bin/reviiyot.o src/reviiyot.cpp
 
 bin/Card.o: src/Card.cpp
 	$(CC) $(CFLAGS) -o bin/Card.o src/Card.cpp
