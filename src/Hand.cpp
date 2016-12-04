@@ -33,7 +33,6 @@ bool Hand::removeCard(Card &card)
 	map<int,Card*>::iterator removeIt;
 	
 	removeIt=hashMap.find( card.get_key() );
-	// remove using iterator is void!
 	hashMap.erase(removeIt);
 	
 	numOfCards--;
@@ -183,7 +182,10 @@ void Hand::removeCardsByKey(int key){
 	int maxVal = 4 - (key%4) + key -1;
 
 	for(int i = maxVal; i >= minVal; i--){
-		removeCard(*(hashMap.at(i)));
+		delete (hashMap.at(i));
+		hashMap.erase(i);
+		numOfCards--;
+		cardIndexCounter.at(key/4)--;
 	}
 }
 
